@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 class FizzBuzzTest {
 
-
-
     @Test
     public void forOneShouldPrint1() {
         Assertions.assertEquals("1", FizzBuzz.get(1));
