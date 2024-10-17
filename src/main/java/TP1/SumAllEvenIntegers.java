@@ -1,8 +1,7 @@
-package fr.baretto;
-
+package TP1;
 import java.util.Scanner;
 
-public class SumAllIntegers {
+public class SumAllEvenIntegers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -12,10 +11,10 @@ public class SumAllIntegers {
         int sum = 0;
 
         if (number > 0) {
-            for (int i = 1; i <= number; i++) {
+            for (int i = 2; i <= number; i += 2) {
                 sum += i;
             }
-            System.out.println("La somme de tous les entiers de 1 à " + number + " est : " + sum);
+            System.out.println("La somme de tous les entiers pairs de 1 à " + number + " est : " + sum);
         } else {
             System.out.println("Veuillez entrer un nombre positif.");
         }
