@@ -9,10 +9,15 @@ public class SumAllEvenIntegers {
         System.out.print("Enter a positive integer: ");
         int number = scanner.nextInt();
 
+
+
         if (number < 1) {
             System.out.println("Please enter a positive integer.");
         } else {
             int sum = 0;
+            for (int i = 2; i <= number; i+=2) {
+                sum += i;
+            }
             System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
         }
 

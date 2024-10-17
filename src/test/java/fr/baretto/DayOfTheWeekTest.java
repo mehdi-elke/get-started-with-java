@@ -21,6 +21,10 @@ public class DayOfTheWeekTest {
     }
 
     public String getDay(final int value) {
-        return null;
+        String[] days = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+        if (value < 1 || value > 7) {
+            return "error";
+        }
+        return days[value - 1];
     }
 }
