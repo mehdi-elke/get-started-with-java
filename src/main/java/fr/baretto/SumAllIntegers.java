@@ -6,14 +6,18 @@ public class SumAllIntegers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a positive integer: ");
+        System.out.print("Entrez un entier positif : ");
         int number = scanner.nextInt();
 
-        if (number < 1) {
-            System.out.println("Please enter a positive integer.");
+        int sum = 0;
+
+        if (number > 0) {
+            for (int i = 1; i <= number; i++) {
+                sum += i;
+            }
+            System.out.println("La somme de tous les entiers de 1 à " + number + " est : " + sum);
         } else {
-            int sum = 0;
-            System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
+            System.out.println("Veuillez entrer un nombre positif.");
         }
 
         scanner.close();
