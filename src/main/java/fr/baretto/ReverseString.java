@@ -5,12 +5,10 @@ import java.util.Scanner;
 public class ReverseString {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string: ");
+        System.out.print("Entrez une chaîne : ");
         String input = scanner.nextLine();
 
-        String inverted = "";
-
-        System.out.println("Reversed string: " + inverted);
+        System.out.println("Chaîne inversée : " + new StringBuilder(input).reverse().toString());
 
         scanner.close();
     }
