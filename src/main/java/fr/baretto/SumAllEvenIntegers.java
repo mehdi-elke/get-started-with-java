@@ -12,7 +12,10 @@ public class SumAllEvenIntegers {
         if (number < 1) {
             System.out.println("Please enter a positive integer.");
         } else {
-            int sum = number * (number + 1);
+            int sum = 0;
+            for (int i = 2; i <= number; i += 2) {
+                sum = sum + i;
+            }
             System.out.println("The sum of all even integers from 1 to " + number + " is: " + sum);
         }
 
