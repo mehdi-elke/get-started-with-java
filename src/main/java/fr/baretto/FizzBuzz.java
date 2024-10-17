@@ -4,21 +4,18 @@ import java.util.Scanner;
 
 public class FizzBuzz {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a int : ");
-        int input = scanner.nextInt();
+    public static String get(int input) {
         int remainderFive = input % 5;
         int remainderThree = input % 3;
         if (remainderFive == 0 && remainderThree == 0) {
-            System.out.print("FizzBuzz");
+            return "FizzBuzz";
         }
         else if (remainderThree == 0) {
-            System.out.print("Fizz");
+            return "Fizz";
         }
         else if (remainderFive == 0) {
-            System.out.print( "Buzz");
+            return "Buzz";
         }
-        System.out.print("");
+        return input + "";
     };
 }
