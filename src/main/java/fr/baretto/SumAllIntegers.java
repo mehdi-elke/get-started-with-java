@@ -18,4 +18,13 @@ public class SumAllIntegers {
 
         scanner.close();
     }
+
+   
+   public static int sumAllIntegers(int val) {
+    int sum = 0; 
+    for (int i = 1; i <= val; i++) {  
+        sum += i;
+    }
+    return sum; 
+} 
 }
