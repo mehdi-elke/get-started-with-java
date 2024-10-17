@@ -10,12 +10,12 @@ public class SumAllEvenIntegers {
         int number = scanner.nextInt();
         int sum = 0;
         if (number > 0) {
-            for (int i = 1; i <= number; i++) {
+            for (int i = 0; i <= number; i = i + 2) {
                 sum += i;
             }
-            System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
+            System.out.println("The sum of all even integers from 1 to " + number + " is: " + sum);
         } else {
-            System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
+            System.out.println("The sum of all even integers from 1 to " + number + " is: " + sum);
         }
 
         scanner.close();
