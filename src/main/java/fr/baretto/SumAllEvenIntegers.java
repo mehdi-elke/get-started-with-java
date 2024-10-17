@@ -8,12 +8,14 @@ public class SumAllEvenIntegers {
 
         System.out.print("Enter a positive integer: ");
         int number = scanner.nextInt();
-
-        if (number < 1) {
-            System.out.println("Please enter a positive integer.");
+        int sum = 0;
+        if (number > 0) {
+            for (int i = 0; i <= number; i = i + 2) {
+                sum += i;
+            }
+            System.out.println("The sum of all even integers from 1 to " + number + " is: " + sum);
         } else {
-            int sum = 0;
-            System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
+            System.out.println("The sum of all even integers from 1 to " + number + " is: " + sum);
         }
 
         scanner.close();
