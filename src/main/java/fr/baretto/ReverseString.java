@@ -8,7 +8,7 @@ public class ReverseString {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        String inverted = "";
+        String inverted = new StringBuilder(input).reverse().toString();
 
         System.out.println("Reversed string: " + inverted);
 
