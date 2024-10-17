@@ -1,4 +1,5 @@
-package fr.baretto;
+package tp;
+
 
 import java.util.Scanner;
 

@@ -1,8 +1,7 @@
-package fr.baretto;
-
-import java.util.Scanner;
+package tp;
 
 public class SumAllIntegers {
+
     public static int sumAll(int n) {
         int sum = 0;
 
