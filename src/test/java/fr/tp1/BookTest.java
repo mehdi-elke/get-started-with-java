@@ -9,7 +9,7 @@ public class BookTest {
     @Test
     public void testEquals() {
         Book book1 = new Book("Harry Potter", "J.K. Rowling", 1997, 10.0);
-        Book book2 = new Book("Harry Potter", "J.K. Rowling", 1998, 32.0);
+        Book book2 = new Book("Harry Potter", "J.K. Rowling", 1977, 10.0);
         Assertions.assertEquals(book1, book2);
     }
 
