@@ -16,7 +16,7 @@ public class SumAllEvenIntegers {
             int i = 0;
             while (i < number) {
                 sum += i;
-                i++;
+                i += 2;
             }
             System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
         }
