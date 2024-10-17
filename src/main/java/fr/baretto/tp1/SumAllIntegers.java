@@ -8,12 +8,14 @@ public class SumAllIntegers {
 
         System.out.print("Enter a positive integer: ");
         int number = scanner.nextInt();
-
-        if (number < 1) {
-            System.out.println("Please enter a positive integer.");
-        } else {
-            int sum = 0;
+        int sum = 0;
+        if (number > 0) {
+            for (int i = 1; i <= number; i++) {
+                sum += i;
+            }
             System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
+        } else {
+            System.out.println("Please enter a positive integer.");
         }
 
         scanner.close();
