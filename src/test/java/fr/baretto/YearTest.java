@@ -15,4 +15,13 @@ class YearTest {
         Assertions.assertFalse(Year.isLeapYear(1900));
     }
 
+    @Test
+    public void isNotALeapYear2() {
+        Assertions.assertFalse(Year.isLeapYear(2001));
+    }
+
+    @Test
+    public void isALeapYear2() {
+        Assertions.assertTrue(Year.isLeapYear(2004));
+    }
 }

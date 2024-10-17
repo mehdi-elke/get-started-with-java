@@ -13,6 +13,9 @@ public class SumAllEvenIntegers {
             System.out.println("Please enter a positive integer.");
         } else {
             int sum = 0;
+            for (int i = 0; i < number; i+=2) {
+                sum += i;
+            }
             System.out.println("The sum of all integers from 1 to " + number + " is: " + sum);
         }
 
