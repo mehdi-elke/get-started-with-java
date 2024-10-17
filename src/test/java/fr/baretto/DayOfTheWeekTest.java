@@ -12,7 +12,7 @@ public class DayOfTheWeekTest {
 
     @Test
     public void oneShouldPrintMonday() {
-        Assertions.assertEquals("monday", getDay(1));
+        Assertions.assertEquals("Monday", getDay(1));
     }
 
     @Test
@@ -21,6 +21,16 @@ public class DayOfTheWeekTest {
     }
 
     public String getDay(final int value) {
-        return null;
+        return switch (value) {
+            case 1 -> "Monday";
+            case 2 -> "Tuesday";
+            case 3 -> "Wednesday";
+            case 4 -> "Thursday";
+            case 5 -> "Friday";
+            case 6 -> "Saturday";
+            case 7 -> "Sunday";
+            default -> "error";
+        };
+
     }
 }
