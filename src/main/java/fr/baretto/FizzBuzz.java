@@ -6,7 +6,7 @@ public class FizzBuzz {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string: ");
+        System.out.print("Enter a int : ");
         int input = scanner.nextInt();
         int remainderFive = input % 5;
         int remainderThree = input % 3;
