@@ -10,6 +10,10 @@ public class ReverseString {
 
         String inverted = "";
 
+        for(int i = input.length()-1;i!=-1;i--){
+            inverted = inverted + input.charAt(i);
+        }
+
         System.out.println("Reversed string: " + inverted);
 
         scanner.close();
