@@ -14,4 +14,20 @@ public class Order {
         this.price = price;
         this.deliveryPlace = deliveryPlace;
     }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public Map<Dish, Integer> getDishes() {
+        return dishes;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDeliveryPlace() {
+        return deliveryPlace;
+    }
 }
