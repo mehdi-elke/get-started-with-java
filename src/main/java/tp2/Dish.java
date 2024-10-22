@@ -2,7 +2,7 @@ package tp2;
 
 public class Dish {
     private String nom;
-    private enum Taille {
+    public enum Taille {
         S,
         M,
         L
@@ -17,13 +17,7 @@ public class Dish {
         this.nom = nom;
     }
 
-    public Taille getTaille() {
-        return taille;
-    }
-
-    public void setTaille(Taille taille) {
-        this.taille = taille;
-    }
+    
 
     public Dish(String nom, Taille taille) {
         this.nom = nom;
