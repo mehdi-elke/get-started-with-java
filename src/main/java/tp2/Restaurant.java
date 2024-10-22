@@ -15,17 +15,13 @@ public class Restaurant {
         return name;
     }
 
-    public Order prepareOrder() {
+    public Order prepareOrder(Map<Dish, Integer> dishes, double price, String deliveryLocation) {
         try {
             Thread.sleep(new Random().nextInt(3000)); // simulate preparation time
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        Map<Dish, Integer> dishes = new HashMap<>(); // add some dishes
-        double amount = 100.0; // example amount
-        String deliveryLocation = "123 Main St";
-
-        return new Order(this, dishes, amount, deliveryLocation);
+        return new Order(this, dishes,price, deliveryLocation);
     }
 }
