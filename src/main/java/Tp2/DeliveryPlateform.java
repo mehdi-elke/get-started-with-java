@@ -26,4 +26,8 @@ public class DeliveryPlateform implements Watcher{
 
         }
     }
+
+    public String getDeliveryOutput() {
+        return "Delivery: " + setorder.iterator().next().getDish().getName() + " From " + setorder.iterator().next().getResto().getName()+" To " + setorder.iterator().next().getAdresse();
+    }
 }
