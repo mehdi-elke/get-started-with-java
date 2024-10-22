@@ -8,14 +8,19 @@ public class Order {
     public final Map<Dish, Integer> dishes;
     public final String address;
     public OrderStatus status;
+    public String uuid;
 
     public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) {
         this.restaurant = restaurant;
         this.dishes = dishes;
         this.address = address;
         this.status = status;
+        this.uuid = generateUUID4();
     }
 
+    public String getId() {
+        return uuid;
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -35,5 +40,9 @@ public class Order {
 
     public String getAddress() {
         return address;
+    }
+
+    public String generateUUID4() {
+        return java.util.UUID.randomUUID().toString();
     }
 }

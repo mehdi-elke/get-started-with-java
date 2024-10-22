@@ -20,6 +20,10 @@ public class DeliveryPlatform implements OrderObserver {
         });
     }
 
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
     @Override
     public void update(Order order) {
         if (order.getStatus() == OrderStatus.READY_FOR_DELIVERY) {
