@@ -17,7 +17,8 @@ public class DeliveryPlatform {
         if (!orders.contains(order)) {
             orders.add(order);
             orderQueue.add(order);
-            delivery(order);
+            processAllOrders();
+            //delivery(order);
         } else {
             System.out.println("Commande en doublon détectée. La commande ne sera pas traitée.");
         }

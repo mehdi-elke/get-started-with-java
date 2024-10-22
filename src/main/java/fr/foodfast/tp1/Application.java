@@ -21,7 +21,6 @@ public class Application {
         resto3.notifyOrder(order3, livraison);
 
         // Test doublon
-        Order order4 = resto3.prepareOrder(4,resto3.getName(), new Dish("Kebab", Dish.Size.S), 6, 51, "15 bd Vauban, 34000 Montpellier");
         resto3.notifyOrder(order3, livraison);
 
     }
