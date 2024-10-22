@@ -18,9 +18,27 @@ public class Order {
         this.place = place;
     }
 
+    public String getLocation() {
+        return location;
+    }
 
+    public String getPlace() {
+        return place;
+    }
 
+    public int getAmount() {
+        return price * quantity;
+    }
 
+    public Dish getDish() {
+        return dish;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
 
+    public int getId() {
+        return id;
+    }
 }

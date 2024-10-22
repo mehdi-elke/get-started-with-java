@@ -1,14 +1,18 @@
 package fr.foodfast.tp1;
 import java.util.*;
 
-public class DeliveryPlatform implements OrderObserver {
+public class DeliveryPlatform {
     private Set<Order> orders = new HashSet<>();
     private Set<Restaurant> restaurants = new HashSet<>();
-    private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getPriority));
+    private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getAmount));
 
-    @Override
+    public void delivery(Order order) {
+        System.out.println("Livraison de la commande de " + order.getPlace() + " à " + order.getLocation() + " pour un montant de " + order.getAmount() + "€ avec x"+ order.getQuantity() + " " + order.getDish().getName());
+        orderQueue.poll();
+    }
+
     public void update(Order order) {
-        System.out.println("Nouvelle commande reçue de " + order.getRestaurant().getName());
+        System.out.println("Nouvelle commande reçue de " + order.getLocation());
 
         if (!orders.contains(order)) {
             orders.add(order);
@@ -17,18 +21,6 @@ public class DeliveryPlatform implements OrderObserver {
         } else {
             System.out.println("Commande en doublon détectée. La commande ne sera pas traitée.");
         }
-    }
-
-    public void delivery(Order order) {
-        System.out.println("Livraison de la commande du restaurant " + order.getRestaurant().getName()
-                + " à " + order.getDeliveryLocation() + " pour un montant de : " + order.getAmount());
-        orderQueue.poll();
-    }
-
-    public void subscribeRestaurant(Restaurant restaurant) {
-        restaurants.add(restaurant);
-        restaurant.addObserver(this);
-        System.out.println(restaurant.getName() + " est abonné à la plateforme de livraison.");
     }
 
     public void processAllOrders() {
