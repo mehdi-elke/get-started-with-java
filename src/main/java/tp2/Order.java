@@ -31,4 +31,14 @@ public class Order {
     public String getDeliveryLocation() {
         return deliveryLocation;
     }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Order{" +
+                "restaurant=" + restaurant +
+                ", dishes=" + dishes +
+                ", price=" + price +
+                ", deliveryLocation='" + deliveryLocation + '\'' +
+                '}';
+    }
 }
