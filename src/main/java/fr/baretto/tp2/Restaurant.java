@@ -15,13 +15,15 @@ public class Restaurant {
         return name;
     }
 
-    public void prepareOrder(List<Dish> dishes, double price, String deliveryPlace) throws InterruptedException {
+    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace) throws InterruptedException {
         Thread.sleep(new Random().nextInt(3000));
         Map<Dish, Integer> dishesMap = new HashMap<>();
         for(Dish dish : dishes){
             dishesMap.merge(dish, 1, Integer::sum);
         }
-        this.notifyObservers("finished order", new Order(this, dishesMap, price, deliveryPlace));
+        Order order = new Order(this, dishesMap, price, deliveryPlace);
+        this.notifyObservers("finished order", order);
+        return order;
     }
 
     public void notifyObservers(String event, Order order){
