@@ -20,6 +20,6 @@ public class Restaurant {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return new Order(this);
+        return new Order(1, name, new Dish("Pizza", Dish.Size.L), 2, 20, "Restaurant Gourmet");
     }
 }

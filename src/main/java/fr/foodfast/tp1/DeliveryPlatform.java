@@ -15,7 +15,7 @@ public class DeliveryPlatform implements OrderObserver {
         if (!orders.contains(order)) {
             orders.add(order);
             orderQueue.add(order);
-            delivery(order); 
+            delivery(order);
         } else {
             System.out.println("Commande en doublon détectée. La commande ne sera pas traitée.");
         }
@@ -29,7 +29,7 @@ public class DeliveryPlatform implements OrderObserver {
 
     public void subscribeRestaurant(Restaurant restaurant) {
         restaurants.add(restaurant);
-        restaurant.addObserver(this); // Le restaurant notifie la plateforme
+        restaurant.addObserver(this);
         System.out.println(restaurant.getName() + " est abonné à la plateforme de livraison.");
     }
 
