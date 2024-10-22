@@ -1,6 +1,6 @@
 package Tp2;
 
-enum Height {
+public enum Height {
     S,
     M,
     L
