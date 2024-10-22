@@ -10,3 +10,7 @@ public class Application {
         }
     }
 }
+
+print("Hello, World!");
+
+
