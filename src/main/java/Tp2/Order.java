@@ -7,6 +7,7 @@ public class Order
     private int quantity;
     private int price;
     private String adresse;
+
     public Order(Restaurant restaurant, Dish dish, int quantity, int price, String adresse){
         this.resto = restaurant;
         this.dish = dish;
@@ -14,4 +15,9 @@ public class Order
         this.price = price;
         this.adresse = adresse;
     }
+    public Restaurant getResto(){return resto;}
+    public Dish getDish(){return dish;}
+    public int getQuantity(){return quantity;}
+    public int getPrice(){return price;}
+    public String getAdresse(){return adresse;}
 }

@@ -7,4 +7,6 @@ public class Dish {
         this.name = name;
         this.size = t;
     }
+    public String getName() {return name;}
+    public Height getSize() {return size;}
 }
