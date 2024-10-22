@@ -14,4 +14,24 @@ public class Order
         this.price = price;
         this.adresse = adresse;
     }
+
+    public Restaurant getResto() {
+        return resto;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
 }
