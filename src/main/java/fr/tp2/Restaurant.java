@@ -21,16 +21,11 @@ public class Restaurant {
         observers.add(observer);
     }
 
-    public void removeObserver(OrderObserver observer) {
-        observers.remove(observer);
-    }
-
     public Order prepareOrder(Order order) throws InterruptedException {
         System.out.println("Preparing order for " + order.getAddress());
         order.status = OrderStatus.PREPARING;
         Thread.sleep(new Random().nextInt(3000));
         order.status = OrderStatus.READY_FOR_DELIVERY;
-
         notifyObservers(order);
 
         return order;

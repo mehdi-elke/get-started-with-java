@@ -13,6 +13,7 @@ public class Application {
         subway.addObserver(observer);
         mcDonalds.addObserver(observer);
 
+
         Dish sub30terryaki = new Dish("30cm Teriyaki",  Dish.DishEnum.L, 10.0);
         Dish sub15bmt = new Dish("15cm BMT",  Dish.DishEnum.M, 5.0);
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
@@ -28,8 +29,7 @@ public class Application {
                 .addDish(sub15bmt, 2)
                 .getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
 
-        DeliveryPlatform platform = new DeliveryPlatform();
-        platform.delivery(order1);
-        platform.delivery(order2);
+        mcDonalds.prepareOrder(order1);
+        subway.prepareOrder(order2);
     }
 }
