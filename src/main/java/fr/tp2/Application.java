@@ -9,6 +9,10 @@ public class Application {
         Restaurant mcDonalds = new Restaurant("McDonald's");
         Restaurant subway = new Restaurant("Subway");
 
+        OrderObserver observer = new DeliveryPlatform();
+        subway.addObserver(observer);
+        mcDonalds.addObserver(observer);
+
         Dish sub30terryaki = new Dish("30cm Teriyaki",  Dish.DishEnum.L, 10.0);
         Dish sub15bmt = new Dish("15cm BMT",  Dish.DishEnum.M, 5.0);
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);

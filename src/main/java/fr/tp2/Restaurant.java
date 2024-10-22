@@ -1,9 +1,13 @@
 package fr.tp2;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observer;
 import java.util.Random;
 
 public class Restaurant {
     private final String name;
+    private final List<OrderObserver> observers = new ArrayList<>();
 
     public Restaurant(String name) {
         this.name = name;
@@ -13,22 +17,28 @@ public class Restaurant {
         return name;
     }
 
+    public void addObserver(OrderObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(OrderObserver observer) {
+        observers.remove(observer);
+    }
+
     public Order prepareOrder(Order order) throws InterruptedException {
         System.out.println("Preparing order for " + order.getAddress());
         order.status = OrderStatus.PREPARING;
         Thread.sleep(new Random().nextInt(3000));
         order.status = OrderStatus.READY_FOR_DELIVERY;
 
-        sendNotif(order);
+        notifyObservers(order);
 
         return order;
     }
 
-    public void sendNotif(Order order){
-        if(order.getStatus() == OrderStatus.READY_FOR_DELIVERY){
-            order.status = OrderStatus.DELIVERED;
-            System.out.println("Order is ready for delivery");
+    private void notifyObservers(Order order) {
+        for (OrderObserver observer : observers) {
+            observer.update(order);
         }
-
     }
 }
