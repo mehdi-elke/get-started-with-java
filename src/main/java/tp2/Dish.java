@@ -17,11 +17,18 @@ public class Dish {
         this.nom = nom;
     }
 
-    
+
 
     public Dish(String nom, Taille taille) {
         this.nom = nom;
         this.taille = taille;
     }
 
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "nom='" + nom + '\'' +
+                ", taille=" + taille +
+                '}';
+    }
 }

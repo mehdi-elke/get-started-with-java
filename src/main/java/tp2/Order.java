@@ -35,8 +35,8 @@ public class Order {
     @java.lang.Override
     public java.lang.String toString() {
         return "Order{" +
-                "restaurant=" + restaurant +
-                ", dishes=" + dishes +
+                "restaurant=" + restaurant.getName() +
+                ", dishes=" + dishes.toString() +
                 ", price=" + price +
                 ", deliveryLocation='" + deliveryLocation + '\'' +
                 '}';

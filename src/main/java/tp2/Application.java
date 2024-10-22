@@ -14,8 +14,9 @@ public class Application {
         Order1.put(BigMac, 3);
         Order1.put(Fries, 2);
 
-        McDo.prepareOrder(Order1, 25.65, "45 Rue du port");
-        
+        Order orderA= McDo.prepareOrder(Order1, 25.65, "45 Rue du port");
+        uberEat.delivery(orderA);
+
     }
 
 
