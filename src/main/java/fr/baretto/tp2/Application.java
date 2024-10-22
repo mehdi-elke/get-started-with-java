@@ -11,8 +11,8 @@ public class Application {
 
 
 
-        restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
-
+        Order order = restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
+        foodFastLivraison.delivery(order);
 
     }
 }

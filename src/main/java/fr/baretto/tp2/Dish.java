@@ -1,7 +1,6 @@
 package fr.baretto.tp2;
 
 public class Dish {
-
     private String name ;
     private DishSize size;
 
