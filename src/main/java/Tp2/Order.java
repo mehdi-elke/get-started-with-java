@@ -20,4 +20,7 @@ public class Order
     public int getQuantity(){return quantity;}
     public int getPrice(){return price;}
     public String getAdresse(){return adresse;}
+    public boolean equals(Order o){
+        return this.adresse.equals(o.getAdresse()) && this.dish.equals(o.getDish()) && this.quantity == o.getQuantity();
+    }
 }

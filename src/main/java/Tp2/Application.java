@@ -8,5 +8,6 @@ public class Application {
         Macdonald.setWatcher(UberEat);
         Dish BigMac = new Dish("BigMac",Height.L);
         Order order = Macdonald.prepareOrder(BigMac,2,3,"1 rue de paris");
+        Order ordeé = Macdonald.prepareOrder(BigMac,2,3,"1 rue de paris");
     }
 }

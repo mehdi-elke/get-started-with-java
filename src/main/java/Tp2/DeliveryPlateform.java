@@ -1,7 +1,9 @@
 package Tp2;
-
+import java.util.HashSet;
+import java.util.Set;
 public class DeliveryPlateform implements Watcher{
     private final String plateform;
+    Set<Order> setorder = new HashSet<>();
     public DeliveryPlateform(String plateform) {this.plateform = plateform;}
     public String getPlateform() {return plateform;}
     public void delivery(Order order) {
@@ -12,7 +14,16 @@ public class DeliveryPlateform implements Watcher{
     public void update(Object o) {
         if (o instanceof Order) {
             Order order = (Order) o;
-            delivery(order);
+            boolean verif = false;
+            for (Order order2 : setorder) {
+                if(order.equals(order2)) {
+                    verif = true;
+                }
+            };
+            if (setorder.add(order)) {
+                if (!verif) {delivery(order);}
+            }
+
         }
     }
 }
