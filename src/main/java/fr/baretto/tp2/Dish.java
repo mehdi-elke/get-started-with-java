@@ -5,7 +5,7 @@ public class Dish {
     private String name;
     private enum size {S, M, L};
 
-    public Dish(String name) {
+    public Dish(String name, double v) {
         this.name = name;
     }
 

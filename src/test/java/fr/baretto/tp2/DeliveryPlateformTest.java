@@ -1,23 +1,16 @@
 package fr.baretto.tp2;
 
+import org.junit.jupiter.api.Test;
+
 public class DeliveryPlateformTest {
 
-    public void deliverOrder(Order order) {
-        String msg = "Votre commande de " + order.getQuantity() + " " + order.getDish().getName() + " a été livrée à cette adresse: " + order.getAddress();
-        msg += " pour un montant de " + order.getInitialPrice() * order.getQuantity() + "€";
-        System.out.println(msg);
+    @Test
+    public void testDeliverOrder() {
+        Restaurant restaurant = new Restaurant("Le Gourmet");
+        Dish dish = new Dish("Burger", 8.0);
+        Order order = new Order(restaurant, dish, 3, 8.0, "456 Avenue de la Liberté");
+        DeliveryPlateform platform = new DeliveryPlateform();
+
+        platform.deliverOrder(order);
     }
-
-    @Test
-    public void notNullOrder() { Assertions.assertNotNull(Order order); }
-
-    @Test
-    public void notNullRestaurant() { Assertions.assertNotNull(Restaurant restaurant); }
-
-    @Test
-    public void notNullDish() { Assertions.assertNotNull(Dish dish); }
-
-    @Test
-    public void isOrderType() { Assertions.assertTrue(order instanceof Order); }
-
 }
