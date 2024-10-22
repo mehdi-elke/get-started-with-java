@@ -14,8 +14,8 @@ public class Restaurant {
         return name;
     }
 
-    public void notifyOrder(Order order) {
-        new DeliveryPlatform().update(order);
+    public void notifyOrder(Order order, DeliveryPlatform livraison) {
+        livraison.update(order);
     }
 
     public Order prepareOrder(int id, String location, Dish dish, int quantity, int price, String place) {

@@ -12,7 +12,7 @@ public class DeliveryPlatform {
     }
 
     public void update(Order order) {
-        System.out.println("Nouvelle commande reçue de " + order.getLocation());
+        System.out.println("Commande de " + order.getQuantity() + " " + order.getDish().getName() + " pour " + order.getAmount() + "€ à livrer à " + order.getPlace());
 
         if (!orders.contains(order)) {
             orders.add(order);
@@ -36,7 +36,4 @@ public class DeliveryPlatform {
         }
     }
 
-    public HashSet restaurantsList() {
-        return (HashSet) restaurants;
-    }
 }
