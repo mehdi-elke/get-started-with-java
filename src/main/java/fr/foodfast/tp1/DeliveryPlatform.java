@@ -7,7 +7,7 @@ public class DeliveryPlatform {
     private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getAmount));
 
     public void delivery(Order order) {
-        System.out.println("Livraison de la commande de " + order.getPlace() + " à " + order.getLocation() + " pour un montant de " + order.getAmount() + "€ avec x"+ order.getQuantity() + " " + order.getDish().getName());
+        System.out.println("Livraison de la commande de " + order.getLocation() + " à " + order.getPlace() + " pour un montant de " + order.getAmount() + "€ avec x"+ order.getQuantity() + " " + order.getDish().getName());
         orderQueue.poll();
     }
 
@@ -23,10 +23,20 @@ public class DeliveryPlatform {
         }
     }
 
+    public Restaurant subscribeRestaurant(Restaurant restaurant) {
+        restaurants.add(restaurant);
+        System.out.println(restaurant.getName() + " est abonné à la plateforme de livraison.");
+        return restaurant;
+    }
+
     public void processAllOrders() {
         while (!orderQueue.isEmpty()) {
             Order order = orderQueue.poll();
             delivery(order);
         }
+    }
+
+    public HashSet restaurantsList() {
+        return (HashSet) restaurants;
     }
 }

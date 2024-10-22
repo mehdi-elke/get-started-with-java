@@ -1,7 +1,6 @@
 package fr.foodfast.tp1;
 
 public class Order {
-
     private int id;
     private String location;
     private Dish dish;
