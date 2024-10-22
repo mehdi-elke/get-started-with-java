@@ -3,9 +3,7 @@ import java.util.*;
 
 public class DeliveryPlatform implements OrderObserver {
     private Set<Order> orders = new HashSet<>();
-
-    private Set<Restaurant> location = new HashSet<>();
-
+    private Set<Restaurant> restaurants = new HashSet<>();
     private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getPriority));
 
     @Override

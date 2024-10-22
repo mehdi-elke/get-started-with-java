@@ -6,7 +6,7 @@ public class Application {
         Restaurant restaurant = new Restaurant("Restaurant Gourmet");
         for (int i = 0; i < 5; i++) {
             Order order = restaurant.prepareOrder();
-            deliveryPlateform.delivery(order);
+            livraison.delivery(order);
         }
     }
 }
