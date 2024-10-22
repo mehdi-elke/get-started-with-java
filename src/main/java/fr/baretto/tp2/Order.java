@@ -1,6 +1,7 @@
 package fr.baretto.tp2;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class Order {
     private Restaurant restaurant;
@@ -13,6 +14,14 @@ public class Order {
         this.dishes = dishes;
         this.price = price;
         this.deliveryPlace = deliveryPlace;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Double.compare(price, order.price) == 0 && Objects.equals(restaurant, order.restaurant) && Objects.equals(dishes, order.dishes) && Objects.equals(deliveryPlace, order.deliveryPlace);
     }
 
     public Restaurant getRestaurant() {

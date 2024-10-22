@@ -13,6 +13,8 @@ public class Application {
 
 
         restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
+        restaurant.prepareOrder(List.of(pates, pizza), 30, "Lille");
+        restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
 
     }
 }
