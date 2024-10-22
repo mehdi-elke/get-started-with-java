@@ -6,13 +6,13 @@ public class Order {
 
     private Restaurant restaurant;
     private Map<Dish, Integer> dishes;
-    private double amount;
+    private double price;
     private String deliveryLocation;
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, double amount, String deliveryLocation) {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, double price, String deliveryLocation) {
         this.restaurant = restaurant;
         this.dishes = dishes;
-        this.amount = amount;
+        this.price = price;
         this.deliveryLocation = deliveryLocation;
     }
 
@@ -24,8 +24,8 @@ public class Order {
         return dishes;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getPrice() {
+        return price;
     }
 
     public String getDeliveryLocation() {
