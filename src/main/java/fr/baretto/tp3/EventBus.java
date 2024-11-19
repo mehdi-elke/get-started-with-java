@@ -25,7 +25,7 @@ public class EventBus {
     }
 
     public void subscribe(Subscriber subscriber, EventType eventType) {
-        var list = subscribers.getOrDefault(eventType, List.of());
+        var list = subscribers.getOrDefault(eventType, new ArrayList<>());
         list.add(subscriber);
         subscribers.put(eventType, list);
     }

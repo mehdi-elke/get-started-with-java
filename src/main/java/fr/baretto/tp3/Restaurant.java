@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class Restaurant {
+public class Restaurant implements Subscriber {
     private String name;
     private EventBus eventBus;
 
@@ -32,4 +32,15 @@ public class Restaurant {
     }
 
 
+    @Override
+    public void handleEvent(Event event) throws InterruptedException {
+        if(event instanceof DeliveryEvent){
+            DeliveryEvent deliveryEvent = ((DeliveryEvent) event);
+            System.out.println("Livraisons de la commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
+            var random = Math.random()*(15 -2) + 2*1000;
+            Thread.sleep((int)random);
+            deliveryEvent.setDeliveryStatus(DeliveryStatus.DELIVERED);
+            System.out.println("Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
+        }
+    }
 }
