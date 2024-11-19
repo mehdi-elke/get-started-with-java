@@ -5,25 +5,17 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DeliveryPlatform implements Observer {
-
+public class DeliveryPlatform implements Subscriber {
     private Set<String> processedOrderIds = new HashSet<>();
     private ExecutorService executorService;
 
-    public DeliveryPlatform() {
+    public DeliveryPlatform(EventBus eventBus) {
         this.executorService = Executors.newFixedThreadPool(4);
-    }
-
-    public void subscribeRestaurant(Restaurant restaurant) {
-        restaurant.addObserver(this);
-    }
-
-    public void unsubscribeRestaurant(Restaurant restaurant) {
-        restaurant.removeObserver(this);
+        eventBus.subscribe(this); // S'abonner au EventBus
     }
 
     @Override
-    public void update(Order order) {
+    public void handleEvent(Order order) {
         executorService.submit(() -> processOrder(order));
     }
 
@@ -35,7 +27,6 @@ public class DeliveryPlatform implements Observer {
             }
             processedOrderIds.add(order.getId());
         }
-
         delivery(order);
     }
 

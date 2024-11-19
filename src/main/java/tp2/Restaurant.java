@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class Restaurant implements Subject {
-    private String name;
-    private List<Observer> observers = new ArrayList<>();
 
-    public Restaurant(String name) {
+public class Restaurant {
+    private String name;
+    private EventBus eventBus;
+
+    public Restaurant(String name, EventBus eventBus) {
         this.name = name;
+        this.eventBus = eventBus;
     }
 
     public String getName() {
@@ -19,30 +21,13 @@ public class Restaurant implements Subject {
 
     public Order prepareOrder(Map<Dish, Integer> dishes, double price, String deliveryLocation) {
         try {
-            Thread.sleep(new Random().nextInt(3000)); // simulate preparation time
+            Thread.sleep(new Random().nextInt(3000)); // Simule le temps de préparation
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         Order order = new Order(this, dishes, price, deliveryLocation);
-        notifyObservers(order); // Notify observers when an order is prepared
+        eventBus.publishEvent(order); // Publier l'événement
         return order;
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers(Order order) {
-        for (Observer observer : observers) {
-            observer.update(order);
-        }
     }
 }
