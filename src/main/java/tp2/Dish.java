@@ -13,6 +13,14 @@ public class Dish {
         return nom;
     }
 
+    public Taille getTaille() {
+        return taille;
+    }
+
+    public void setTaille(Taille taille) {
+        this.taille = taille;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
