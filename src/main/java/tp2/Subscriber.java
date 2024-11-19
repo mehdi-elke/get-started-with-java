@@ -1,2 +1,5 @@
-package tp2;public class Subscriber {
+package tp2;
+
+public interface Subscriber {
+    void handleEvent(Order order);
 }
