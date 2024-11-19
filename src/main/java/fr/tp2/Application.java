@@ -9,12 +9,13 @@ public class Application {
         Restaurant mcDonalds = new Restaurant("McDonald's");
         Restaurant subway = new Restaurant("Subway");
 
-        OrderObserver observer = new DeliveryPlatform();
-        subway.addObserver(observer);
-        mcDonalds.addObserver(observer);
+        DeliveryPlatform observer = new DeliveryPlatform();
+        observer.addRestaurant(mcDonalds);
+        observer.addRestaurant(subway);
 
+        EventBus.subscribe(observer);
 
-        Dish sub30Terryaki = new Dish("30cm Teriyaki",  Dish.DishEnum.L, 10.0);
+        Dish sub30Teriyaki = new Dish("30cm Teriyaki",  Dish.DishEnum.L, 10.0);
         Dish sub15bmt = new Dish("15cm BMT",  Dish.DishEnum.M, 5.0);
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
         Dish mcNuggets = new Dish("McNuggets", Dish.DishEnum.S, 6.0);
@@ -25,7 +26,7 @@ public class Application {
                 .getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
 
         Order order2 = new Order(subway, (new ListDishes())
-                .addDish(sub30Terryaki, 1)
+                .addDish(sub30Teriyaki, 1)
                 .addDish(sub15bmt, 2)
                 .getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
 

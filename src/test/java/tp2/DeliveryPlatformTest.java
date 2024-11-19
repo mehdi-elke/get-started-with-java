@@ -25,6 +25,8 @@ public class DeliveryPlatformTest {
 
         platform.addRestaurant(mcDonalds);
         platform.addRestaurant(subway);
+
+        EventBus.subscribe(platform);
     }
 
     @Test
@@ -50,7 +52,7 @@ public class DeliveryPlatformTest {
     @Test
     public void testOrderPriority() throws InterruptedException {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
-        Dish sub30Terryaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
+        Dish sub30Teriyaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
 
         ListDishes listDishes1 = new ListDishes();
         listDishes1.addDish(bigMac, 1);
@@ -58,7 +60,7 @@ public class DeliveryPlatformTest {
         order1.uuid = UUID.randomUUID().toString();
 
         ListDishes listDishes2 = new ListDishes();
-        listDishes2.addDish(sub30Terryaki, 1);
+        listDishes2.addDish(sub30Teriyaki, 1);
         Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
         order2.uuid = UUID.randomUUID().toString();
 
@@ -73,7 +75,7 @@ public class DeliveryPlatformTest {
     @Test
     public void testIsOrderDuplicate() throws InterruptedException {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
-        Dish sub30Terryaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
+        Dish sub30Teriyaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
 
         ListDishes listDishes1 = new ListDishes();
         listDishes1.addDish(bigMac, 1);
@@ -83,7 +85,7 @@ public class DeliveryPlatformTest {
         order1.uuid = uuidVar;
 
         ListDishes listDishes2 = new ListDishes();
-        listDishes2.addDish(sub30Terryaki, 1);
+        listDishes2.addDish(sub30Teriyaki, 1);
         Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
         order2.uuid = uuidVar;
 
