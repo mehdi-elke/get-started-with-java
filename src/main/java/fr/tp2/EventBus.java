@@ -16,7 +16,7 @@ public class EventBus {
         subscribers.add(subscriber);
     }
 
-    public static void handleEvent(Order order) {
+    public static void handleEvent(EventType type, Order order) {
         for (Subscriber subscriber : subscribers) {
             subscriber.handleEvent(order);
         }

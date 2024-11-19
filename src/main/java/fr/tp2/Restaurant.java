@@ -18,9 +18,11 @@ public class Restaurant {
     public Order prepareOrder(Order order) throws InterruptedException {
         System.out.println("Preparing order for " + order.getAddress());
         order.status = OrderStatus.PREPARING;
+        EventBus.handleEvent(EventType.ORDER_PREPARED, order);
         Thread.sleep(new Random().nextInt(3000));
         order.status = OrderStatus.READY_FOR_DELIVERY;
-        EventBus.handleEvent(order);
+        EventBus.handleEvent(EventType.DELIVERY, order);
+
 
         return order;
     }
