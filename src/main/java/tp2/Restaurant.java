@@ -1,11 +1,13 @@
 package tp2;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class Restaurant {
+public class Restaurant implements Subject {
     private String name;
+    private List<Observer> observers = new ArrayList<>();
 
     public Restaurant(String name) {
         this.name = name;
@@ -22,6 +24,25 @@ public class Restaurant {
             e.printStackTrace();
         }
 
-        return new Order(this, dishes,price, deliveryLocation);
+        Order order = new Order(this, dishes, price, deliveryLocation);
+        notifyObservers(order); // Notify observers when an order is prepared
+        return order;
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(Order order) {
+        for (Observer observer : observers) {
+            observer.update(order);
+        }
     }
 }
