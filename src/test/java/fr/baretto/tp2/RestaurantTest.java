@@ -18,7 +18,6 @@ public class RestaurantTest {
         Order order = restaurant.prepareOrder(dish, 2, 10.0, "123 Rue Principale");
 
         Assertions.assertNotNull(order);
-
         Assertions.assertEquals("Pizza", order.getDish().getName());
         Assertions.assertEquals(2, order.getQuantity());
         Assertions.assertEquals("123 Rue Principale", order.getAddress());
