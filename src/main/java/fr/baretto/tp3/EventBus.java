@@ -3,21 +3,25 @@ package fr.baretto.tp3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventBus implements Subscriber {
+public class EventBus {
 
-    private static List<Subscriber> subscribers;
+    private List<Subscriber> subscribers;
 
     public EventBus() {
-        EventBus.subscribers = new ArrayList<>();
+        subscribers = new ArrayList<>();
     }
 
-    @Override
     public void handleEvent(Order order) {
-
+        subscribers.forEach(subscriber -> {
+            try {
+                subscriber.handleEvent(order);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    @Override
     public void subscribe(Subscriber subscriber) {
-        EventBus.subscribers.add(subscriber);
+        subscribers.add(subscriber);
     }
 }

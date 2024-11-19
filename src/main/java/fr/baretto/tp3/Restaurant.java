@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class Restaurant {
     private String name;
-    private List<Observer> observers;
+    private EventBus eventBus;
 
-    public Restaurant(String name) {
+    public Restaurant(String name, EventBus eventBus) {
         this.name = name;
-        this.observers = new ArrayList<>();
+        this.eventBus = eventBus;
     }
 
     public String getName() {
@@ -26,21 +26,9 @@ public class Restaurant {
             dishesMap.merge(dish, 1, Integer::sum);
         }
         Order order = new Order(this, dishesMap, price, deliveryPlace);
-        this.notifyObservers("finished order", order);
+        this.eventBus.handleEvent(order);
         return order;
     }
 
-    public void notifyObservers(String event, Order order){
-        this.observers.forEach(observer -> {
-            try {
-                observer.update(event, order);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
 
-    public void addObserver(Observer observer){
-        this.observers.add(observer);
-    }
 }
