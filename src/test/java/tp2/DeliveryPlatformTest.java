@@ -50,16 +50,15 @@ public class DeliveryPlatformTest {
     @Test
     public void testOrderPriority() throws InterruptedException {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
-        Dish sub30terryaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
+        Dish sub30Terryaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
 
         ListDishes listDishes1 = new ListDishes();
         listDishes1.addDish(bigMac, 1);
         Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
         order1.uuid = UUID.randomUUID().toString();
-        order1.uuid = UUID.randomUUID().toString();
 
         ListDishes listDishes2 = new ListDishes();
-        listDishes2.addDish(sub30terryaki, 1);
+        listDishes2.addDish(sub30Terryaki, 1);
         Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
         order2.uuid = UUID.randomUUID().toString();
 
@@ -69,5 +68,30 @@ public class DeliveryPlatformTest {
 
         assertEquals(OrderStatus.DELIVERED, order1.getStatus());
         assertEquals(OrderStatus.DELIVERED, order2.getStatus());
+    }
+
+    @Test
+    public void testIsOrderDuplicate() throws InterruptedException {
+        Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
+        Dish sub30Terryaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
+
+        ListDishes listDishes1 = new ListDishes();
+        listDishes1.addDish(bigMac, 1);
+        Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+        String uuidVar = UUID.randomUUID().toString();
+
+        order1.uuid = uuidVar;
+
+        ListDishes listDishes2 = new ListDishes();
+        listDishes2.addDish(sub30Terryaki, 1);
+        Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
+        order2.uuid = uuidVar;
+
+        mcDonalds.prepareOrder(order1);
+        subway.prepareOrder(order2);
+        Thread.sleep(4000);
+
+        assertEquals(OrderStatus.DELIVERED, order1.getStatus());
+        assertEquals(OrderStatus.IN_ERROR, order2.getStatus());
     }
 }
