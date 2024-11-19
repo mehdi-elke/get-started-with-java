@@ -26,7 +26,8 @@ public class Restaurant {
             dishesMap.merge(dish, 1, Integer::sum);
         }
         Order order = new Order(this, dishesMap, price, deliveryPlace);
-        this.eventBus.handleEvent(order);
+        OrderEvent orderEvent = new OrderEvent(order);
+        this.eventBus.handleEvent(EventType.ORDER_PREPARED, orderEvent);
         return order;
     }
 
