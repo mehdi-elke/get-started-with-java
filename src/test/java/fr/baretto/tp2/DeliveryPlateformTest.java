@@ -41,7 +41,6 @@ public class DeliveryPlateformTest {
         Order duplicateOrder = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix");
 
         deliveryPlatform.update(order1);
-
         deliveryPlatform.update(duplicateOrder);
 
         assertEquals(1, deliveryPlatform.getOrderCount());
