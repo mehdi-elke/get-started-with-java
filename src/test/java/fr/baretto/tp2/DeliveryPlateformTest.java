@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeliveryPlateformTest {
 
-    private DeliveryPlatform deliveryPlatform;
+    private DeliveryPlateform deliveryPlatform;
     private Restaurant restaurant;
 
     @BeforeEach
     public void setup() {
-        deliveryPlatform = new DeliveryPlatform();
+        deliveryPlatform = new DeliveryPlateform();
         restaurant = new Restaurant("Testaurant");
         restaurant.addObserver(deliveryPlatform);
     }

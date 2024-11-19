@@ -3,10 +3,10 @@ package fr.baretto.tp2;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DeliveryPlatform {
+public class DeliveryPlateform {
     private Set<Order> uniqueOrders;
 
-    public DeliveryPlatform() {
+    public DeliveryPlateform() {
         uniqueOrders = new HashSet<>();
     }
 
