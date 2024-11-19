@@ -11,20 +11,12 @@ public class EventBus {
     }
 
     public void subscribe(Subscriber subscriber) {
-        subscribers.add(subscriber); // Ajout d'un subscriber unique
+        subscribers.add(subscriber);
     }
 
-    public void publishEvent(Order order) {
+    public void publishEvent(Event event) {
         for (Subscriber subscriber : subscribers) {
-            subscriber.handleEvent(order); // Notifie chaque subscriber
+            subscriber.handleEvent(event);
         }
-    }
-
-    public int getSubscriberCount() {
-        return subscribers.size();
-    }
-
-    public boolean containsSubscriber(Subscriber subscriber) {
-        return subscribers.contains(subscriber);
     }
 }

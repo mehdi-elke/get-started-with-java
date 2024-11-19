@@ -2,7 +2,7 @@ package fr.baretto.tp2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.Mockito.*;
 
 public class EventBusTest {
@@ -20,31 +20,22 @@ public class EventBusTest {
     }
 
     @Test
-    public void testSubscribe() {
+    public void testOrderPreparedEvent() {
         eventBus.subscribe(subscriber1);
-        eventBus.subscribe(subscriber2);
+        Event orderEvent = new OrderEvent(order);
 
-        assertEquals(2, eventBus.getSubscriberCount());
-        assertTrue(eventBus.containsSubscriber(subscriber1));
-        assertTrue(eventBus.containsSubscriber(subscriber2));
+        eventBus.publishEvent(orderEvent);
+
+        verify(subscriber1, times(1)).handleEvent(orderEvent);
     }
 
     @Test
-    public void testPublishEvent() {
-        eventBus.subscribe(subscriber1);
+    public void testDeliveryEvent() {
         eventBus.subscribe(subscriber2);
+        Event deliveryEvent = new DeliveryEvent(order, DeliveryStatus.IN_DELIVERY);
 
-        eventBus.publishEvent(order);
+        eventBus.publishEvent(deliveryEvent);
 
-        verify(subscriber1, times(1)).handleEvent(order);
-        verify(subscriber2, times(1)).handleEvent(order);
-    }
-
-    @Test
-    public void testNoDuplicateSubscribers() {
-        eventBus.subscribe(subscriber1);
-        eventBus.subscribe(subscriber1); // Essai d'ajouter le même subscriber
-
-        assertEquals(1, eventBus.getSubscriberCount());
+        verify(subscriber2, times(1)).handleEvent(deliveryEvent);
     }
 }
