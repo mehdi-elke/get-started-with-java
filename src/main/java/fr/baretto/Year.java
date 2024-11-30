@@ -1,4 +1,4 @@
-package fr.baretto.tp1;
+package fr.baretto;
 
 public class Year {
 
