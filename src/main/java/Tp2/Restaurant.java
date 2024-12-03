@@ -23,7 +23,7 @@ public class Restaurant implements Subcriber{
 
         deliveryEvent.setPayload(delplat);
         EventBus.getInstance().publish(deliveryEvent);
-        System.out.println("Order prepared: " + dish.getName() + " From " + this.getName() + " To " + address);
+        Logger.getInstance().logEvent("Order prepared: " + dish.getName() + " From " + this.getName() + " To " + address);
 
         if (RANDOM.nextDouble() < 0.2) {
             throw new OrderPreparationException("Order preparation failed");

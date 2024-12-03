@@ -11,8 +11,7 @@ public class DeliveryPlateform implements Subcriber {
     public String getPlateform() {return plateform;}
     private static final Random RANDOM = new Random();
     public void delivery(Order order) throws DeliveryProcessingException {
-        System.out.println("Delivery: " + order.getDish().getName() + " From " + order.getResto().getName()+" To " + order.getAdresse() );
-
+        Logger.getInstance().logEvent("Delivery: " + order.getDish().getName() + " From " + order.getResto().getName()+" To " + order.getAdresse());
         if (RANDOM.nextDouble() < 0.2) {
             throw new DeliveryProcessingException("Delivery failed");
         }
