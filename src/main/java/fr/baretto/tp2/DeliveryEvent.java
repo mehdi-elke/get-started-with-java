@@ -15,6 +15,7 @@ public class DeliveryEvent implements Event {
         this.status = status;
         this.deliveryId = UUID.randomUUID();
         this.notificationService = notificationService;
+        Logger.getInstance().log("Nouvel événement de type " + getEventType() + " : " + eventId + " - Commande de " + order.getDish().getName() + " pour " + order.getCustomer().getFirstName() + " " + order.getCustomer().getLastName());
         sendDeliveryNotification();
     }
 

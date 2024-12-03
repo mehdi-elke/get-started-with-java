@@ -11,6 +11,7 @@ public class OrderEvent implements Event {
         this.eventId = UUID.randomUUID();
         this.order = order;
         this.notificationService = notificationService;
+        Logger.getInstance().log("Nouvel événement de type " + getEventType() + " : " + eventId + " - Commande de " + order.getDish().getName() + " pour " + order.getCustomer().getFirstName() + " " + order.getCustomer().getLastName());
         sendOrderPreparedNotification();
     }
 
