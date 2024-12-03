@@ -32,6 +32,9 @@ public class DeliveryPlatform extends Subscriber {
             throw new DeliveryProcessingException("Order in error: " + order.getId());
         }
         System.out.println("[StatusChange] Order " + order.getId() + " is now " + order.getStatus());
+        if (order.getStatus() == OrderStatus.DELIVERED) {
+            Logger.logDelivery(order.getId());
+        }
     }
 
     public void handleOrderEvent(Event event) throws Throwable {
@@ -47,6 +50,7 @@ public class DeliveryPlatform extends Subscriber {
         orderIds.add(order.getId());
 
         System.out.println("[Order] New order received");
+        Logger.logOrder(order.getId());
     }
 
 
