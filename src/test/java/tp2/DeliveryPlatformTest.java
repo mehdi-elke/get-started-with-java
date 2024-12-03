@@ -23,13 +23,13 @@ public class DeliveryPlatformTest {
         Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
         platform.deliver(order);
 
-        // Verify that the order was delivered and an invoice was created
+
         BillingService billingService = platform.getBillingService();
         Invoice invoice = billingService.getInvoice(order.getId());
         assertNotNull(invoice);
         assertEquals(Invoice.Status.CREATED, invoice.getStatus());
 
-        // Simulate delivery completion
+
         platform.completeDelivery(order);
         assertEquals(Invoice.Status.CLOSED, invoice.getStatus());
         assertEquals(Order.Status.COMPLETED, order.getStatus());
@@ -50,13 +50,13 @@ public class DeliveryPlatformTest {
         Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
         platform.notifyOrder(order);
 
-        // Verify that the order was delivered and an invoice was created
+
         BillingService billingService = platform.getBillingService();
         Invoice invoice = billingService.getInvoice(order.getId());
         assertNotNull(invoice);
         assertEquals(Invoice.Status.CREATED, invoice.getStatus());
 
-        // Simulate delivery completion
+
         platform.completeDelivery(order);
         assertEquals(Invoice.Status.CLOSED, invoice.getStatus());
         assertEquals(Order.Status.COMPLETED, order.getStatus());
@@ -77,11 +77,11 @@ public class DeliveryPlatformTest {
         Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
         platform.notifyOrder(order);
 
-        // Cancel the order before delivery
+
         platform.cancelOrder(order);
         assertEquals(Order.Status.CANCELLED, order.getStatus());
 
-        // Verify that the order is not delivered
+
         platform.completeDelivery(order);
         assertEquals(Order.Status.CANCELLED, order.getStatus());
     }
@@ -101,11 +101,11 @@ public class DeliveryPlatformTest {
         Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
         platform.notifyOrder(order);
 
-        // Simulate delivery completion
+
         platform.completeDelivery(order);
         assertEquals(Order.Status.COMPLETED, order.getStatus());
 
-        // Cancel the order after delivery
+
         platform.cancelOrder(order);
         assertEquals(Order.Status.CANCELLED, order.getStatus());
     }

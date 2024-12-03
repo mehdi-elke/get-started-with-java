@@ -8,7 +8,7 @@ public class BillingService {
 
     public Invoice createInvoice(Order order) {
         Invoice invoice = new Invoice(order);
-        invoices.put(order.getId(), invoice); // Use order ID as the key
+        invoices.put(order.getId(), invoice);
         System.out.println("Invoice created: " + invoice);
         return invoice;
     }

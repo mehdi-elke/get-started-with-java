@@ -7,6 +7,6 @@ public class NotificationServiceTest {
     public void testSendNotification() {
         NotificationService notificationService = new NotificationService();
         notificationService.sendNotification("Test notification");
-        // Check console output manually or use a logging framework to capture output
+
     }
 }

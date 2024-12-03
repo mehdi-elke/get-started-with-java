@@ -24,10 +24,10 @@ public class EventBus {
         String sql = "INSERT INTO events (id, type, event_timestamp, details) VALUES (?, ?, ?, ?)";
         try (Connection connection = DatabaseUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setObject(1, event.getId(), java.sql.Types.OTHER); // Use setObject with Types.OTHER for UUID
+            statement.setObject(1, event.getId(), java.sql.Types.OTHER);
             statement.setString(2, event.getType().name());
             statement.setObject(3, LocalDateTime.now());
-            statement.setString(4, event.toString()); // Assuming Event has a proper toString() method
+            statement.setString(4, event.toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

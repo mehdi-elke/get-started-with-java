@@ -23,18 +23,17 @@ public class DeliveryPlatform implements Subscriber {
             return;
         }
 
-        if (random.nextInt(100) < 20) { // 20% chance of failure
+        if (random.nextInt(100) < 20) {
             throw new DeliveryProcessingException("Failed to deliver order: " + order.getId());
         }
         if (orders.add(order)) {
             logger.log("Delivering order: " + order.getId());
             notificationService.sendNotification("Your order " + order.getId() + " is being delivered to " + order.getCustomer().getDeliveryAddress());
             Invoice invoice = billingService.createInvoice(order);
-            // Simulate delivery completion
+
             new Thread(() -> {
                 try {
-                    Thread.sleep(random.nextInt(13000) + 2000); // Simulate delivery time between 2 and 15 seconds
-                    completeDelivery(order);
+                    Thread.sleep(random.nextInt(13000) + 2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
