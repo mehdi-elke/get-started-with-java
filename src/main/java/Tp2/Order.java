@@ -14,6 +14,7 @@ public class Order
         this.quantity = quantity;
         this.price = price;
         this.adresse = adresse;
+
     }
     public Restaurant getResto(){return resto;}
     public Dish getDish(){return dish;}
@@ -22,5 +23,10 @@ public class Order
     public String getAdresse(){return adresse;}
     public boolean equals(Order o){
         return this.adresse.equals(o.getAdresse()) && this.dish.equals(o.getDish()) && this.quantity == o.getQuantity();
+    }
+    public void publish(){
+        OrderEvent orderEvent = new OrderEvent(EventType.ORDER_PREPARED);
+        orderEvent.setPayload(this);
+        EventBus.getInstance().publish(orderEvent);
     }
 }

@@ -1,6 +1,6 @@
 package Tp2;
 
 public interface Subcriber {
-    void handleEvent(Order order);
-
+    void handleEvent(Event event);
+    void sub();
 }

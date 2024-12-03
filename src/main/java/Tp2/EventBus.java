@@ -1,32 +1,36 @@
 package Tp2;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class EventBus {
-    private final Set<Subcriber> subscribers;
 
-    public EventBus() {
-        subscribers = new HashSet<>();
+    private static EventBus SingleInstance = null;
+    private Map<EventType, List<Subcriber>> subscribers = new HashMap<>();
+
+    public void subscribe(EventType eventType, Subcriber subscriber) {
+
+        subscribers.computeIfAbsent(eventType, k -> new ArrayList<>()).add(subscriber);
     }
-
-    public void subscribe(Subcriber subscriber) {
-        subscribers.add(subscriber);
+    public static EventBus getInstance() {
+        if (SingleInstance == null) {
+            SingleInstance = new EventBus();
+        }
+        return SingleInstance;
     }
-
-    public void publish(Order order ) {
-        for (Subcriber subscriber : subscribers) {
-            subscriber.handleEvent(order);
+    public void publish(Event event ) {
+        EventType eventType = event.getType(); // Chaque Event a un type
+        List<Subcriber> interestedSubscribers = subscribers.get(eventType);
+        if (interestedSubscribers != null) {
+            for (Subcriber subscriber : interestedSubscribers) {
+                subscriber.handleEvent(event);
+            }
         }
     }
-
     public int getSubscribersSize() {
         return subscribers.size();
     }
-
-    public boolean isSubscribed(Subcriber subscriber) {
-        return subscribers.contains(subscriber);
-    }
 }
+
+
+
+
