@@ -20,6 +20,8 @@ public class EventBus {
                         subscriber.handleEvent(event);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
+                    } catch (DeliveryProcessingException e) {
+                        System.out.println(e.getMessage());
                     }
                 });
     }

@@ -20,7 +20,7 @@ public class Restaurant implements Subscriber {
         return name;
     }
 
-    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace) throws InterruptedException {
+    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace) throws InterruptedException, OrderPreparationException {
         Thread.sleep(new Random().nextInt(3000));
 
         Map<Dish, Integer> dishesMap = new HashMap<>();
@@ -29,8 +29,19 @@ public class Restaurant implements Subscriber {
         }
 
         Order order = new Order(this, dishesMap, price, deliveryPlace);
-        orders.add(order);
 
+        Double random = Math.random();
+        if(random < 0.2){
+            try {
+                throw new OrderPreparationException("Kohaku(mon chat, le loukoum) a décidé que l'order ne passerait pas AHAHAHAHAHAHAH");
+            } catch (OrderPreparationException e) {
+                System.out.println(e.getMessage());
+                ErrorManagementService.exceptions.add(e);
+            }
+            return null;
+        }
+
+        orders.add(order);
         OrderEvent orderEvent = new OrderEvent(order);
 
         this.eventBus.handleEvent(EventType.ORDER_PREPARED, orderEvent);
@@ -44,16 +55,13 @@ public class Restaurant implements Subscriber {
         if(event instanceof DeliveryEvent) {
 
             DeliveryEvent deliveryEvent = ((DeliveryEvent) event);
-
             if (orders.contains(deliveryEvent.getOrder())) {
-
-                System.out.println("["+ name +"] Livraisons de la commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
-                Thread.sleep((int) Math.random()*(15 -2) + 2*1000);
-
-                deliveryEvent.setDeliveryStatus(DeliveryStatus.DELIVERED);
-
-                System.out.println("["+ name +"] Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
-                orders.remove(deliveryEvent.getOrder());
+                if (deliveryEvent.getDeliveryStatus() == DeliveryStatus.IN_DELIVERY) {
+                    System.out.println("["+ name +"] Livraisons de la commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
+                } else if (deliveryEvent.getDeliveryStatus() == DeliveryStatus.DELIVERED) {
+                    System.out.println("["+ name +"] Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
+                    orders.remove(deliveryEvent.getOrder());
+                }
             }
         }
     }

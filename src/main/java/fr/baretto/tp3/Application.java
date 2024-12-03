@@ -3,7 +3,7 @@ package fr.baretto.tp3;
 import java.util.List;
 
 public class Application {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, OrderPreparationException {
         EventBus eventBus = new EventBus();
 
         Restaurant restaurant = new Restaurant("FoodFast", eventBus);
@@ -27,5 +27,6 @@ public class Application {
         restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
         restaurant2.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
 
+        System.out.println(ErrorManagementService.exceptions);
     }
 }
