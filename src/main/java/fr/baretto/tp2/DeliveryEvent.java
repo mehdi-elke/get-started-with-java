@@ -7,12 +7,21 @@ public class DeliveryEvent implements Event {
     private final Order order;
     private final DeliveryStatus status;
     private final UUID deliveryId;
+    private final NotificationService notificationService;
 
-    public DeliveryEvent(Order order, DeliveryStatus status) {
+    public DeliveryEvent(Order order, DeliveryStatus status, NotificationService notificationService) {
         this.eventId = UUID.randomUUID();
         this.order = order;
         this.status = status;
         this.deliveryId = UUID.randomUUID();
+        this.notificationService = notificationService;
+        sendDeliveryNotification();
+    }
+
+    private void sendDeliveryNotification() {
+        String message = "Bonjour " + order.getCustomer().getFirstName() + ", votre commande de " +
+                order.getDish().getName() + " est maintenant " + status.toString().toLowerCase() + ".";
+        notificationService.sendNotification(message);
     }
 
     public Order getOrder() {

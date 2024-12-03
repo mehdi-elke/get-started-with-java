@@ -3,10 +3,10 @@ package fr.baretto.tp2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class RestaurantTest {
+class RestaurantTest {
 
     @Test
-    public void testNotifyObservers() {
+    void testNotifyObservers() {
         Restaurant restaurant = new Restaurant("Le Gourmet");
 
         DeliveryPlateform platform = new DeliveryPlateform();
@@ -15,7 +15,11 @@ public class RestaurantTest {
 
         Dish dish = new Dish("Pizza", 10.0);
 
-        Order order = restaurant.prepareOrder(dish, 2, 10.0, "123 Rue Principale");
+        // Créez un client pour ce test
+        Customer customer = new Customer("Alice", "Dupont", "123 Rue Principale", "0612345678");
+
+        // Passez le client comme argument
+        Order order = restaurant.prepareOrder(dish, 2, 10.0, "123 Rue Principale", customer);
 
         Assertions.assertNotNull(order);
         Assertions.assertEquals("Pizza", order.getDish().getName());
@@ -24,7 +28,7 @@ public class RestaurantTest {
     }
 
     @Test
-    public void testAddRemoveObserver() {
+    void testAddRemoveObserver() {
         Restaurant restaurant = new Restaurant("Le Bistro");
 
         DeliveryPlateform platform = new DeliveryPlateform();

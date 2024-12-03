@@ -8,13 +8,15 @@ public class Order {
     private int quantity;
     private double initialPrice;
     private String address;
+    private final Customer customer; // Nouveau champ
 
-    public Order(Restaurant restaurant, Dish dish, int quantity, double initialPrice, String address) {
+    public Order(Restaurant restaurant, Dish dish, int quantity, double initialPrice, String address, Customer customer) {
         this.restaurant = restaurant;
         this.dish = dish;
         this.quantity = quantity;
         this.initialPrice = initialPrice;
         this.address = address;
+        this.customer = customer;
     }
 
     public Restaurant getRestaurant() {
@@ -55,6 +57,10 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
     @Override
