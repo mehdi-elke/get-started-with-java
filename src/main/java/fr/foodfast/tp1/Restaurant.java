@@ -14,16 +14,39 @@ public class Restaurant {
         return name;
     }
 
-    public void notifyOrder(Order order, DeliveryPlatform livraison) {
+    public void notifyOrder(Order order, DeliveryPlatform livraison) throws DeliveryProcessingException {
+        Random random = new Random();
+        Logger logger = Logger.getInstance();
+        NotificationService notificationService = new NotificationService();
+
+        if (random.nextDouble() < 0.2) { // 20 % de probabilité d'échec
+            throw new DeliveryProcessingException("Échec du traitement de la livraison pour la commande " + order.getId());
+        }
         livraison.update(order);
+        logger.logEvent("Commande livrée : " + order);
+
+        notificationService.sendNotification("Votre commande " + order.getId() + " a été livrée à " + order.getPlace() + ".");
     }
 
-    public Order prepareOrder(int id, String location, Dish dish, int quantity, int price, String place) {
+    public Order prepareOrder(int id, String location, Dish dish, int quantity, int price, String place) throws OrderPreparationException {
         try {
             Thread.sleep(new Random().nextInt(3000));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return new Order(id, location, dish, quantity, price, place);
+        Random random = new Random();
+        Logger logger = Logger.getInstance();
+        NotificationService notificationService = new NotificationService();
+
+        if (random.nextDouble() < 0.2) { // 20 % de probabilité d'échec
+            throw new OrderPreparationException("Échec de la préparation de la commande pour " + location);
+        }
+        Order order = new Order(id, location, dish, quantity, price, place);
+        logger.logEvent("Commande reçue : " + order);
+
+        notificationService.sendNotification("Votre commande " + order.getId() + " est en cours de préparation, " + order.getLocation() + ".");
+
+        return order;
     }
+
 }

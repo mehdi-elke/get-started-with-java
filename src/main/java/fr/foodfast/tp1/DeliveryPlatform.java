@@ -1,7 +1,7 @@
 package fr.foodfast.tp1;
 import java.util.*;
 
-public class DeliveryPlatform {
+public class DeliveryPlatform implements Subscriber {
     private Set<Order> orders = new HashSet<>();
     private Set<Restaurant> restaurants = new HashSet<>();
     private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getAmount));
@@ -34,6 +34,18 @@ public class DeliveryPlatform {
         while (!orderQueue.isEmpty()) {
             Order order = orderQueue.poll();
             delivery(order);
+        }
+    }
+
+    @Override
+    public void handleEvent(Event event) {
+        if (event instanceof OrderEvent) {
+            OrderEvent orderEvent = (OrderEvent) event;
+            System.out.println("Delivery platform notified: Order prepared -> " + orderEvent.getOrder().getId());
+        } else if (event instanceof DeliveryEvent) {
+            DeliveryEvent deliveryEvent = (DeliveryEvent) event;
+            System.out.println("Delivery platform notified: Delivery -> " +
+                    deliveryEvent.getOrder().getId() + ", Status: " + deliveryEvent.getStatus());
         }
     }
 

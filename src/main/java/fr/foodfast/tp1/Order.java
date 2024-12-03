@@ -1,5 +1,7 @@
 package fr.foodfast.tp1;
 
+import java.util.Objects;
+
 public class Order {
     private int id;
     private String location;
@@ -39,5 +41,36 @@ public class Order {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Order order = (Order) obj;
+        return id == order.id &&
+                quantity == order.quantity &&
+                price == order.price &&
+                Objects.equals(location, order.location) &&
+                Objects.equals(dish, order.dish) &&
+                Objects.equals(place, order.place);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, location, dish, quantity, price, place);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", location='" + location + '\'' +
+                ", dish=" + dish +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", place='" + place + '\'' +
+                '}';
     }
 }
