@@ -2,11 +2,13 @@ package tp2;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Application {
     public static void main(String[] args) {
         ErrorManagementService errorService = new ErrorManagementService();
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = new Random();
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();

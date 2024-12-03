@@ -1,7 +1,8 @@
 package tp2;
+
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Random;
+import java.util.Set;
 
 public class DeliveryPlatform implements Subscriber {
     private Set<Order> orders = new HashSet<>();
@@ -9,9 +10,11 @@ public class DeliveryPlatform implements Subscriber {
     private Logger logger = Logger.getInstance();
     private NotificationService notificationService = new NotificationService();
     private BillingService billingService = new BillingService();
+    private Random random;
 
-    public DeliveryPlatform(ErrorManagementService errorService) {
+    public DeliveryPlatform(ErrorManagementService errorService, Random random) {
         this.errorService = errorService;
+        this.random = random;
     }
 
     public void deliver(Order order) throws DeliveryProcessingException {
@@ -20,7 +23,7 @@ public class DeliveryPlatform implements Subscriber {
             return;
         }
 
-        if (new Random().nextInt(100) < 20) { // 20% chance of failure
+        if (random.nextInt(100) < 20) { // 20% chance of failure
             throw new DeliveryProcessingException("Failed to deliver order: " + order.getId());
         }
         if (orders.add(order)) {
@@ -30,7 +33,7 @@ public class DeliveryPlatform implements Subscriber {
             // Simulate delivery completion
             new Thread(() -> {
                 try {
-                    Thread.sleep(new Random().nextInt(13000) + 2000); // Simulate delivery time between 2 and 15 seconds
+                    Thread.sleep(random.nextInt(13000) + 2000); // Simulate delivery time between 2 and 15 seconds
                     completeDelivery(order);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

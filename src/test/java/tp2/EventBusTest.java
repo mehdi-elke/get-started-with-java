@@ -1,4 +1,5 @@
 package tp2;
+
 import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,8 @@ public class EventBusTest {
     public void testEventSavedToDatabase() {
         EventBus eventBus = new EventBus();
         ErrorManagementService errorService = new ErrorManagementService();
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = new Random();
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();

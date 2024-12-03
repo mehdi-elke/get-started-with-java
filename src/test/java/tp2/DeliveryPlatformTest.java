@@ -1,10 +1,9 @@
 package tp2;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
+import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -12,7 +11,9 @@ public class DeliveryPlatformTest {
     @Test
     public void testDeliver() throws DeliveryProcessingException {
         ErrorManagementService errorService = mock(ErrorManagementService.class);
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = mock(Random.class);
+        when(random.nextInt(100)).thenReturn(50);
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();
@@ -37,7 +38,9 @@ public class DeliveryPlatformTest {
     @Test
     public void testNotifyOrder() {
         ErrorManagementService errorService = mock(ErrorManagementService.class);
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = mock(Random.class);
+        when(random.nextInt(100)).thenReturn(50); // Simuler un succès de livraison
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();
@@ -62,7 +65,9 @@ public class DeliveryPlatformTest {
     @Test
     public void testCancelOrderBeforeDelivery() {
         ErrorManagementService errorService = mock(ErrorManagementService.class);
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = mock(Random.class);
+        when(random.nextInt(100)).thenReturn(50); // Simuler un succès de livraison
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();
@@ -84,7 +89,9 @@ public class DeliveryPlatformTest {
     @Test
     public void testCancelOrderAfterDelivery() {
         ErrorManagementService errorService = mock(ErrorManagementService.class);
-        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Random random = mock(Random.class);
+        when(random.nextInt(100)).thenReturn(50); // Simuler un succès de livraison
+        DeliveryPlatform platform = new DeliveryPlatform(errorService, random);
         Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
 
         Map<Dish, Integer> dishes = new HashMap<>();
