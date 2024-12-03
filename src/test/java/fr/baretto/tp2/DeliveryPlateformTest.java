@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DeliveryPlateformTest {
+class DeliveryPlateformTest {
 
     private DeliveryPlateform deliveryPlatform;
     private Restaurant restaurant;
@@ -17,17 +17,18 @@ public class DeliveryPlateformTest {
     }
 
     @Test
-    public void testDeliverOrder() {
-        Restaurant restaurant = new Restaurant("Le Gourmet");
+    void testDeliverOrder() {
+        Restaurant testRestaurant = new Restaurant("Le Gourmet");
         Dish dish = new Dish("Burger", 8.0);
-        Order order = new Order(restaurant, dish, 3, 8.0, "456 Avenue de la Liberté");
+        Order order = new Order(testRestaurant, dish, 3, 8.0, "456 Avenue de la Liberté");
         DeliveryPlateform platform = new DeliveryPlateform();
 
         platform.deliverOrder(order);
-    }
 
+        assertTrue(platform.containsOrder(order));
+    }
     @Test
-    public void testUniqueOrder() {
+    void testUniqueOrder() {
         Order order1 = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix");
 
         deliveryPlatform.update(order1);
@@ -36,7 +37,7 @@ public class DeliveryPlateformTest {
     }
 
     @Test
-    public void testDuplicateOrder() {
+    void testDuplicateOrder() {
         Order order1 = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix");
         Order duplicateOrder = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix");
 
@@ -48,7 +49,7 @@ public class DeliveryPlateformTest {
     }
 
     @Test
-    public void testDifferentOrder() {
+    void testDifferentOrder() {
         Order order1 = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix");
         Order order2 = new Order(restaurant, new Dish("Tacos", 5.0), 1, 15.0, "20 rue de la liberté");
 

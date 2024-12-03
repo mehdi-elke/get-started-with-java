@@ -1,5 +1,7 @@
 package fr.baretto.tp2;
 
+import java.util.Objects;
+
 public class Order {
     private Restaurant restaurant;
     private Dish dish;
@@ -43,7 +45,7 @@ public class Order {
         return initialPrice;
     }
 
-    public void setInitialPrice(float initialPrice) {
+    public void setInitialPrice(double initialPrice) {
         this.initialPrice = initialPrice;
     }
 
@@ -53,5 +55,22 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return quantity == order.quantity &&
+                Double.compare(order.initialPrice, initialPrice) == 0 &&
+                Objects.equals(restaurant, order.restaurant) &&
+                Objects.equals(dish, order.dish) &&
+                Objects.equals(address, order.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(restaurant, dish, quantity, initialPrice, address);
     }
 }

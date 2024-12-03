@@ -23,6 +23,7 @@ public class DeliveryPlateform {
     }
 
     public void deliverOrder(Order order) {
+        uniqueOrders.add(order); // Ensure the order is added to the set
         String msg = "Votre commande de " + order.getQuantity() + " " + order.getDish().getName() +
                 " a été livrée à cette adresse: " + order.getAddress();
         msg += " pour un montant de " + order.getInitialPrice() * order.getQuantity() + "€";
