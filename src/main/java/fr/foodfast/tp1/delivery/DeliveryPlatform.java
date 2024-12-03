@@ -9,15 +9,15 @@ import java.util.*;
 public class DeliveryPlatform implements Subscriber {
     private Set<Order> orders = new HashSet<>();
     private Set<Restaurant> restaurants = new HashSet<>();
-    private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getAmount));
+    private PriorityQueue<Order> orderQueue = new PriorityQueue<>(Comparator.comparing(Order::getPrice));
 
     public void delivery(Order order) {
-        System.out.println("Livraison de la commande de " + order.getLocation() + " à " + order.getPlace() + " pour un montant de " + order.getAmount() + "€ avec x"+ order.getQuantity() + " " + order.getDish().getName());
+        System.out.println("Livraison de la commande de " + order.getLocation() + " à " + order.getAddress() + " pour un montant de " + order.getPrice() + "€ avec x"+ order.getQuantity() + " " + order.getDish().getName());
         orderQueue.poll();
     }
 
     public void update(Order order) {
-        System.out.println("Commande de " + order.getQuantity() + " " + order.getDish().getName() + " pour " + order.getAmount() + "€ à livrer à " + order.getPlace());
+        System.out.println("Commande de " + order.getQuantity() + " " + order.getDish().getName() + " pour " + order.getPrice() + "€ à livrer à " + order.getAddress());
 
         if (!orders.contains(order)) {
             orders.add(order);

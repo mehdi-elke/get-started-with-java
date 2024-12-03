@@ -28,9 +28,9 @@ public class Restaurant {
             throw new DeliveryProcessingException("Échec du traitement de la livraison pour la commande " + order.getId());
         }
         livraison.update(order);
-        logger.logEvent("Commande livrée : " + order);
+        logger.logEvent("Commande livrée : " + order.getId());
 
-        notificationService.sendNotification("Votre commande " + order.getId() + " a été livrée à " + order.getPlace() + ".");
+        notificationService.sendNotification("Votre commande " + order.getId() + " a été livrée à " + order.getLocation() + ".");
     }
 
     public Order prepareOrder(int id, String location, Dish dish, int quantity, int price, String place) throws OrderPreparationException {
@@ -44,7 +44,7 @@ public class Restaurant {
         NotificationService notificationService = new NotificationService();
 
         Order order = new Order(id, location, dish, quantity, price, place);
-        logger.logEvent("Commande reçue : " + order);
+        logger.logEvent("Commande reçue : " + order.getId());
 
         notificationService.sendNotification("Votre commande " + order.getId() + " est en cours de préparation, " + order.getLocation() + ".");
 
