@@ -12,6 +12,9 @@ public class Application {
         Dish BigMac = new Dish("BigMac",Height.L);
         Order order = new Order(Macdonald, BigMac, 2, 10, "Paris");
         order.publish();
+        for (String log : Logger.getInstance().getLogs()) {
+            System.out.println(log);
+        }
 
     }
 }
