@@ -43,9 +43,6 @@ public class Restaurant {
         Logger logger = Logger.getInstance();
         NotificationService notificationService = new NotificationService();
 
-        if (random.nextDouble() < 0.2) { // 20 % de probabilité d'échec
-            throw new OrderPreparationException("Échec de la préparation de la commande pour " + location);
-        }
         Order order = new Order(id, location, dish, quantity, price, place);
         logger.logEvent("Commande reçue : " + order);
 
