@@ -1,8 +1,12 @@
 package fr.foodfast.tp1;
 
+import fr.foodfast.tp1.delivery.DeliveryEvent;
+import fr.foodfast.tp1.event.EventBus;
+import fr.foodfast.tp1.order.Order;
+import fr.foodfast.tp1.order.OrderEvent;
 import org.junit.jupiter.api.Test;
 
-import static fr.foodfast.tp1.DeliveryEvent.Status.*;
+import static fr.foodfast.tp1.delivery.DeliveryEvent.Status.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventBusTest {

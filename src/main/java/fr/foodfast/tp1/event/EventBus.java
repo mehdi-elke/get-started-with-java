@@ -1,4 +1,7 @@
-package fr.foodfast.tp1;
+package fr.foodfast.tp1.event;
+
+import fr.foodfast.tp1.Subscriber;
+import fr.foodfast.tp1.delivery.DeliveryEvent;
 
 import java.util.ArrayList;
 import java.util.List;

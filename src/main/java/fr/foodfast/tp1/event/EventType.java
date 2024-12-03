@@ -1,4 +1,4 @@
-package fr.foodfast.tp1;
+package fr.foodfast.tp1.event;
 
 public enum EventType {
     ORDER_PREPARED,

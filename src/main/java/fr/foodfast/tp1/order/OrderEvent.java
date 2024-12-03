@@ -1,4 +1,7 @@
-package fr.foodfast.tp1;
+package fr.foodfast.tp1.order;
+
+import fr.foodfast.tp1.event.Event;
+import fr.foodfast.tp1.event.EventType;
 
 import java.util.UUID;
 

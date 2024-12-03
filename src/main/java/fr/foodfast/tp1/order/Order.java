@@ -1,4 +1,6 @@
-package fr.foodfast.tp1;
+package fr.foodfast.tp1.order;
+
+import fr.foodfast.tp1.Dish;
 
 import java.util.Objects;
 
