@@ -1,13 +1,15 @@
 package fr.tp2;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class DeliveryPlatform implements Subscriber {
+public class DeliveryPlatform extends Subscriber {
     private final List<Restaurant> restaurants = new ArrayList<>();
     private final Set<String> orderIds = new HashSet<>();
+
+    @Override
+    public List<Class<? extends Event>> getSuscribedEvents() {
+        return Arrays.asList(OrderEvent.class, DeliveryEvent.class);
+    }
 
     public void addRestaurant(Restaurant restaurant) {
         restaurants.add(restaurant);
@@ -17,15 +19,31 @@ public class DeliveryPlatform implements Subscriber {
         return restaurants;
     }
 
-    @Override
-    public void handleEvent(Order order) {
+    public void handleDeliveryEvent(Event event) throws Exception {
+        if (!(event instanceof DeliveryEvent)) {
+            return;
+        }
+        Order order = (Order) event.getObject();
+
+
+        System.out.println("[StatusChange] Order " + order.getId() + " is now " + order.getStatus());
+    }
+
+    public void handleOrderEvent(Event event) throws Exception {
+        if (!(event instanceof OrderEvent)) {
+            return;
+        }
+        Order order = (Order) event.getObject();
+
         if (orderIds.contains(order.getId())) {
             System.err.printf("Duplicate order detected: " + order.getId());
-            order.status = OrderStatus.IN_ERROR;
+            order.setStatus(OrderStatus.IN_ERROR);
             return;
         }
         orderIds.add(order.getId());
-        System.out.println("Order is ready for delivery to " + order.getAddress());
-        order.status = OrderStatus.DELIVERED;
+
+        System.out.println("[Order] New order received");
     }
+
+
 }

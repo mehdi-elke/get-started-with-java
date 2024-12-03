@@ -1,5 +1,6 @@
 package fr.tp2;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class Restaurant {
@@ -15,15 +16,15 @@ public class Restaurant {
     }
 
 
-    public Order prepareOrder(Order order) throws InterruptedException {
-        System.out.println("Preparing order for " + order.getAddress());
-        order.status = OrderStatus.PREPARING;
-        EventBus.handleEvent(EventType.ORDER_PREPARED, order);
-        Thread.sleep(new Random().nextInt(3000));
-        order.status = OrderStatus.READY_FOR_DELIVERY;
-        EventBus.handleEvent(EventType.DELIVERY, order);
+    public void prepareOrder(Order order) throws Exception {
+        order.setStatus(OrderStatus.PREPARING);
+
+        Thread.sleep(new Random().nextInt(1000) + 1000);
+        order.setStatus(OrderStatus.READY_FOR_DELIVERY);
+
+        Thread.sleep(new Random().nextInt(13000) + 2000);
+        order.setStatus(OrderStatus.DELIVERED);
 
 
-        return order;
     }
 }

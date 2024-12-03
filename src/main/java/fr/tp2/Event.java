@@ -1,7 +1,12 @@
 package fr.tp2;
 
-public interface Event {
+public abstract class Event {
+    private Subscribable object;
+    Event(Subscribable object) {
+        this.object = object;
+    }
 
-    public void handleEvent(Order order);
-
+    public Subscribable getObject() {
+        return object;
+    }
 }

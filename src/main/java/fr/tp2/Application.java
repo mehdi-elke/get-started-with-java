@@ -1,11 +1,7 @@
 package fr.tp2;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Application {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         Restaurant mcDonalds = new Restaurant("McDonald's");
         Restaurant subway = new Restaurant("Subway");
 

@@ -1,21 +1,28 @@
 package fr.tp2;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-public class Order {
+public class Order implements Subscribable {
 
     public final Restaurant restaurant;
     public final Map<Dish, Integer> dishes;
     public final String address;
-    public OrderStatus status;
+    private OrderStatus status;
     public String uuid;
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        this(restaurant, dishes, address, status, generateUUID4());
+    }
+
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, String uuid) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         this.restaurant = restaurant;
         this.dishes = dishes;
         this.address = address;
         this.status = status;
-        this.uuid = generateUUID4();
+        this.uuid = uuid;
+
+        EventBus.handleEvent(EventType.ORDER, this);
     }
 
     public String getId() {
@@ -42,7 +49,16 @@ public class Order {
         return address;
     }
 
-    public String generateUUID4() {
+    public static String generateUUID4() {
         return java.util.UUID.randomUUID().toString();
+    }
+
+    public Order setStatus(OrderStatus status) throws Exception {
+
+        if (this.status != OrderStatus.IN_ERROR) {
+            this.status = status;
+            EventBus.handleEvent(EventType.DELIVERY, this);
+        }
+        return this;
     }
 }

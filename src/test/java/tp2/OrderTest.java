@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class OrderTest {
 
     Restaurant sacha;
@@ -19,7 +21,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testCreateOrder() {
+    public void testCreateOrder() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Order order1 = new Order(sacha, (new ListDishes())
                 .addDish(nouilles, 1)
                 .addDish(ramen, 3)
