@@ -7,12 +7,13 @@ public class Application {
         EventBus eventBus = new EventBus();
 
         Restaurant restaurant = new Restaurant("FoodFast", eventBus);
-
+        Restaurant restaurant2 = new Restaurant("FoodFast2", eventBus);
 
         DeliveryPlateform foodFastLivraison = new DeliveryPlateform(eventBus);
 
         eventBus.subscribe(foodFastLivraison, EventType.ORDER_PREPARED);
         eventBus.subscribe(restaurant, EventType.DELIVERY);
+        eventBus.subscribe(restaurant2, EventType.DELIVERY);
 
 
         Dish pates = new Dish("pâtes", DishSize.M);
@@ -24,6 +25,7 @@ public class Application {
         restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
         restaurant.prepareOrder(List.of(pates, pizza), 30, "Lille");
         restaurant.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
+        restaurant2.prepareOrder(List.of(pates, lasagnes, pizza), 30, "Lille");
 
     }
 }

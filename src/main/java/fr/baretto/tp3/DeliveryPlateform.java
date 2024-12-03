@@ -2,10 +2,12 @@ package fr.baretto.tp3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class DeliveryPlateform implements Subscriber {
     private List<Order> orders;
+    private Map<String, Restaurant> restaurants;
     private EventBus eventBus;
 
     public DeliveryPlateform( EventBus eventBus) {
