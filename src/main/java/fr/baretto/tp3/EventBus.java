@@ -1,5 +1,6 @@
 package fr.baretto.tp3;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ public class EventBus {
                         subscriber.handleEvent(event);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
-                    } catch (DeliveryProcessingException e) {
+                    } catch (DeliveryProcessingException | SQLException e) {
                         System.out.println(e.getMessage());
                     }
                 });

@@ -1,6 +1,13 @@
 package fr.baretto.tp3;
 
+import fr.baretto.tp3.database.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +27,7 @@ public class Restaurant implements Subscriber {
         return name;
     }
 
-    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace, Customer customer) throws InterruptedException, OrderPreparationException {
+    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace, Customer customer) throws InterruptedException, OrderPreparationException, SQLException {
         Thread.sleep(new Random().nextInt(3000));
 
         Map<Dish, Integer> dishesMap = new HashMap<>();
@@ -44,6 +51,13 @@ public class Restaurant implements Subscriber {
         orders.add(order);
         OrderEvent orderEvent = new OrderEvent(order);
 
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO events(id, type, date) VALUES(?, ?, ?)");
+        statement.setObject(1, orderEvent.getId());
+        statement.setString(2, "Order");
+        statement.setString(3, "" + new Date().getTime());
+        statement.execute();
+
         this.eventBus.handleEvent(EventType.ORDER_PREPARED, orderEvent);
 
         return order;
@@ -51,7 +65,7 @@ public class Restaurant implements Subscriber {
 
 
     @Override
-    public void handleEvent(Event event) throws InterruptedException {
+    public void handleEvent(Event event) throws InterruptedException, SQLException {
         if(event instanceof DeliveryEvent) {
 
             DeliveryEvent deliveryEvent = ((DeliveryEvent) event);

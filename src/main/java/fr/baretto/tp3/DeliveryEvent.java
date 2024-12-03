@@ -3,8 +3,8 @@ package fr.baretto.tp3;
 import java.util.UUID;
 
 public class DeliveryEvent implements Event {
-    private Order order;
     private UUID orderNumber;
+    private Order order;
     private DeliveryStatus deliveryStatus;
 
     public DeliveryEvent(OrderEvent orderEvent, DeliveryStatus deliveryStatus) {
