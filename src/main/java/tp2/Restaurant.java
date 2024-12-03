@@ -1,4 +1,5 @@
 package tp2;
+
 import java.util.Map;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ public class Restaurant {
     }
 
     public Order prepareOrder(Map<Dish, Integer> dishes, double amount, String deliveryLocation, Customer customer) throws InterruptedException, OrderPreparationException {
-        if (new Random().nextInt(100) < 20) { // 20% chance of failure
+        if (dishes == null || dishes.isEmpty()) {
             throw new OrderPreparationException("Failed to prepare order at " + name);
         }
         Thread.sleep(new Random().nextInt(3000));
