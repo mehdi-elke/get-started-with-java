@@ -21,14 +21,38 @@ public class DeliveryPlateformTest {
     }
 
     @Test
+    public void deliveryTestPlateformNotNull() {
+        Assertions.assertNotNull(deliveryPlateform);
+    }
+
+    @Test
+    public void getPlateformTest() {
+        Assertions.assertEquals("UberEats", deliveryPlateform.getPlateform());
+    }
+
+    @Test
     public void deliveryTestOrderNotNull() {
         Assertions.assertNotNull(order);
     }
 
+
     @Test
-    public void deliverySuccessTest() {
-        deliveryPlateform.update(order);
+    public void deliverySuccessTest() throws DeliveryProcessingException {
+        deliveryPlateform.delivery(order);
         Assertions.assertEquals("Delivery: Pasta From Chez Bob To 123 Main St", deliveryPlateform.getDeliveryOutput());
     }
+
+    @Test
+    public void updateTestOrderAlreadyExists() throws DeliveryProcessingException {
+        deliveryPlateform.delivery(order);
+        deliveryPlateform.delivery(order);
+        Assertions.assertEquals(1, deliveryPlateform.getSetOrderSize());
+    }
+
+    @Test
+    public void deliveryMethodTest() throws DeliveryProcessingException {
+        deliveryPlateform.delivery(order);
+    }
+
 
 }

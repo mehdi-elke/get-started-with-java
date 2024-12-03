@@ -22,22 +22,32 @@ public class EventBusTest {
 
     @Test
     public void testSubscribe() {
-        eventBus.subscribe(subscriber);
+        eventBus.subscribe(EventType.DELIVERY, subscriber);
         assertEquals(1, eventBus.getSubscribersSize());
-        assertTrue(eventBus.isSubscribed(subscriber));
+        assertTrue(eventBus.getSubscribers().containsKey(EventType.DELIVERY));
     }
 
     @Test
     public void testPublish() {
-        eventBus.subscribe(subscriber);
-        eventBus.publish(order);
-        verify(subscriber, times(1)).handleEvent(order);
+        eventBus.subscribe(EventType.DELIVERY, subscriber);
+        eventBus.publish(new OrderEvent(EventType.DELIVERY));
+        verify(subscriber, times(1)).handleEvent(any());
     }
 
     @Test
     public void testNoDuplicates() {
-        eventBus.subscribe(subscriber);
-        eventBus.subscribe(subscriber);
+        eventBus.subscribe(EventType.DELIVERY, subscriber);
+        eventBus.subscribe(EventType.DELIVERY, subscriber);
         assertEquals(1, eventBus.getSubscribersSize());
+    }
+
+    @Test
+    public void testShouldNotifyDeliveryPlatform() {
+        //TODO: Implement this test
+    }
+
+    @Test
+    public void testRestaurantShouldPrintTheirInfo() {
+        //TODO: Implement this test
     }
 }

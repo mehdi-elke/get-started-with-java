@@ -11,11 +11,12 @@ public class Restaurant implements Subcriber{
     private Watcher deliveryPlateform;
     public Restaurant(String name) {this.name = name;}
     public DeliveryPlateform delplat;
+    private static final Random RANDOM = new Random();
   ;
     public void addDeliveryPlateform(DeliveryPlateform deliveryPlateform) {
         delplat= deliveryPlateform;
     }
-    public Order prepareOrder(Dish dish, int quantity, int price, String address, UUID id) {
+    public Order prepareOrder(Dish dish, int quantity, int price, String address, UUID id) throws OrderPreparationException {
 
         Order nOrder =  new Order(this, dish, quantity, price, address);
         DeliveryEvent deliveryEvent = new DeliveryEvent(EventType.DELIVERY, nOrder);
@@ -24,6 +25,9 @@ public class Restaurant implements Subcriber{
         EventBus.getInstance().publish(deliveryEvent);
         System.out.println("Order prepared: " + dish.getName() + " From " + this.getName() + " To " + address);
 
+        if (RANDOM.nextDouble() < 0.2) {
+            throw new OrderPreparationException("Order preparation failed");
+        }
         return nOrder;
     }
     public void setWatcher(Watcher watcher) {
@@ -36,7 +40,11 @@ public class Restaurant implements Subcriber{
             OrderEvent orderEvent = (OrderEvent) order;
             Order order1 = orderEvent.getPayload();
             if (order1.getResto().equals(this)) {
-                this.prepareOrder(order1.getDish(), order1.getQuantity(), order1.getPrice(), order1.getAdresse(), orderEvent.getId());
+                try {
+                    this.prepareOrder(order1.getDish(), order1.getQuantity(), order1.getPrice(), order1.getAdresse(), orderEvent.getId());
+                } catch (OrderPreparationException e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 return;

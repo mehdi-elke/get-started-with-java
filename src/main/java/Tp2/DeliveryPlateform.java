@@ -1,5 +1,6 @@
 package Tp2;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Flow;
 
@@ -8,8 +9,13 @@ public class DeliveryPlateform implements Subcriber {
     Set<Order> setorder = new HashSet<>();
     public DeliveryPlateform(String plateform) {this.plateform = plateform;}
     public String getPlateform() {return plateform;}
-    public void delivery(Order order) {
+    private static final Random RANDOM = new Random();
+    public void delivery(Order order) throws DeliveryProcessingException {
         System.out.println("Delivery: " + order.getDish().getName() + " From " + order.getResto().getName()+" To " + order.getAdresse() );
+
+        if (RANDOM.nextDouble() < 0.2) {
+            throw new DeliveryProcessingException("Delivery failed");
+        }
     }
 //    @Override
 //    public void update(Object o) {
@@ -39,12 +45,20 @@ public class DeliveryPlateform implements Subcriber {
             DeliveryEvent orderEvent = (DeliveryEvent) order;
             DeliveryPlateform order1 = orderEvent.getPayload();
             if (order1.equals(this)) {
-                this.delivery(orderEvent.ord);
+                try {
+                    this.delivery(orderEvent.ord);
+                } catch (DeliveryProcessingException e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 return;
             }
         }
+    }
+
+    public int getSetOrderSize() {
+        return setorder.size();
     }
 
     public String getDeliveryOutput() {

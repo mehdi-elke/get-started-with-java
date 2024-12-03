@@ -29,6 +29,10 @@ public class EventBus {
     public int getSubscribersSize() {
         return subscribers.size();
     }
+
+    public Map<EventType, List<Subcriber>> getSubscribers() {
+        return subscribers;
+    }
 }
 
 
