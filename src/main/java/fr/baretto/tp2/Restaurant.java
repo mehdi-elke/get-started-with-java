@@ -36,10 +36,19 @@ public class Restaurant {
     }
 
     public Order prepareOrder(Dish dish, int quantity, double initialPrice, String address) {
-        this.getDeliveryTime();
-        Order order = new Order(this, dish, quantity, initialPrice, address);
-        notifyObservers(order);
-        return order;
+        try {
+            if (new Random().nextInt(100) < 20) { // 20% de probabilité d'échec
+                throw new OrderPreparationException("Échec de la préparation de la commande.");
+            }
+            this.getDeliveryTime();
+            Order order = new Order(this, dish, quantity, initialPrice, address);
+            notifyObservers(order);
+            return order;
+        } catch (OrderPreparationException e) {
+            ErrorManagementService.logError(e.getMessage());
+            System.out.println("Erreur : " + e.getMessage());
+            return null; // Retourne null pour signaler l'échec
+        }
     }
 
     public void getDeliveryTime() {
