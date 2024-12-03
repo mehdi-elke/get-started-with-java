@@ -16,7 +16,7 @@ public class EventBus {
         subscribers.add(subscriber);
     }
 
-    public void publish(Order order) {
+    public void publish(Order order ) {
         for (Subcriber subscriber : subscribers) {
             subscriber.handleEvent(order);
         }
