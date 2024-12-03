@@ -21,7 +21,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testCreateOrder() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+    public void testCreateOrder() throws Throwable {
         Order order1 = new Order(sacha, (new ListDishes())
                 .addDish(nouilles, 1)
                 .addDish(ramen, 3)

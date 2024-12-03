@@ -36,7 +36,7 @@ public class DeliveryPlatformTest {
     }
 
     @Test
-    public void testDeliveryOrder() throws Exception {
+    public void testDeliveryOrder() throws Throwable {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
 
         ListDishes listDishes = new ListDishes();
@@ -50,7 +50,7 @@ public class DeliveryPlatformTest {
     }
 
     @Test
-    public void testOrderPriority() throws Exception {
+    public void testOrderPriority() throws Throwable {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
         Dish sub30Teriyaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
 
@@ -74,7 +74,7 @@ public class DeliveryPlatformTest {
     }
 
     @Test
-    public void testIsOrderDuplicate() throws Exception {
+    public void testIsOrderDuplicate() throws Throwable {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
         Dish sub30Teriyaki = new Dish("30cm Teriyaki", Dish.DishEnum.L, 10.0);
 

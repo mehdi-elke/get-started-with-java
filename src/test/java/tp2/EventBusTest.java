@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EventBusTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private EventBus eventBus;
     private Restaurant mcdo;
     private Restaurant subway;
@@ -39,7 +37,7 @@ public class EventBusTest {
     }
 
     @Test
-    public void testPublishEvent() throws Exception {
+    public void testPublishEvent() throws Throwable {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
         Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
 
@@ -48,7 +46,7 @@ public class EventBusTest {
     }
 
     @Test
-    public void testNoSubscriber() throws Exception {
+    public void testNoSubscriber() throws Throwable {
         EventBus.subscribers.clear();
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
         Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);

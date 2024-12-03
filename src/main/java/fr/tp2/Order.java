@@ -11,11 +11,11 @@ public class Order implements Subscribable {
     private OrderStatus status;
     public String uuid;
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) throws Throwable {
         this(restaurant, dishes, address, status, generateUUID4());
     }
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, String uuid) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, String uuid) throws Throwable {
         this.restaurant = restaurant;
         this.dishes = dishes;
         this.address = address;
@@ -53,12 +53,12 @@ public class Order implements Subscribable {
         return java.util.UUID.randomUUID().toString();
     }
 
-    public Order setStatus(OrderStatus status) throws Exception {
+    public Order setStatus(OrderStatus status) throws Throwable {
 
         if (this.status != OrderStatus.IN_ERROR) {
             this.status = status;
-            EventBus.handleEvent(EventType.DELIVERY, this);
         }
+        EventBus.handleEvent(EventType.DELIVERY, this);
         return this;
     }
 }

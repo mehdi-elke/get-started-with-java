@@ -15,9 +15,8 @@ public class EventBus {
         subscribers.add(subscriber);
     }
 
-    public static void handleEvent(EventType type, Subscribable $object) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void handleEvent(EventType type, Subscribable $object) throws Throwable {
         Event event = type.getEventClass().getDeclaredConstructor(Subscribable.class).newInstance($object);
-        try {
             for (Subscriber subscriber : subscribers) {
                 if (!subscriber.getSuscribedEvents().contains(event.getClass())) {
                     return;
@@ -25,13 +24,12 @@ public class EventBus {
                 String methodName = "handle" + event.getClass().getSimpleName();
                 try {
                     subscriber.getClass().getMethod(methodName, Event.class).invoke(subscriber, event);
+                } catch (InvocationTargetException e) {
+                    throw e.getCause();
                 } catch (NoSuchMethodException e) {
                     System.out.println("No method found for " + methodName);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
 

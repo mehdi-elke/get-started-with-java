@@ -8,7 +8,10 @@ public class DeliveryPlatform extends Subscriber {
 
     @Override
     public List<Class<? extends Event>> getSuscribedEvents() {
-        return Arrays.asList(OrderEvent.class, DeliveryEvent.class);
+        return Arrays.asList(
+                OrderEvent.class,
+                DeliveryEvent.class
+        );
     }
 
     public void addRestaurant(Restaurant restaurant) {
@@ -25,20 +28,21 @@ public class DeliveryPlatform extends Subscriber {
         }
         Order order = (Order) event.getObject();
 
-
+        if (order.getStatus() == OrderStatus.IN_ERROR) {
+            throw new DeliveryProcessingException("Order in error: " + order.getId());
+        }
         System.out.println("[StatusChange] Order " + order.getId() + " is now " + order.getStatus());
     }
 
-    public void handleOrderEvent(Event event) throws Exception {
+    public void handleOrderEvent(Event event) throws Throwable {
         if (!(event instanceof OrderEvent)) {
             return;
         }
         Order order = (Order) event.getObject();
 
         if (orderIds.contains(order.getId())) {
-            System.err.printf("Duplicate order detected: " + order.getId());
             order.setStatus(OrderStatus.IN_ERROR);
-            return;
+            throw new OrderPreparationException("Duplicate order detected: " + order.getId());
         }
         orderIds.add(order.getId());
 
