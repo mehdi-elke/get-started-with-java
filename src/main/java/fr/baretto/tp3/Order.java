@@ -8,12 +8,14 @@ public class Order {
     private Map<Dish, Integer> dishes;
     private double price;
     private String deliveryPlace;
+    private Customer customer;
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, double price, String deliveryPlace) {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, double price, String deliveryPlace, Customer customer) {
         this.restaurant = restaurant;
         this.dishes = dishes;
         this.price = price;
         this.deliveryPlace = deliveryPlace;
+        this.customer = customer;
     }
 
     @Override
@@ -38,5 +40,9 @@ public class Order {
 
     public String getDeliveryPlace() {
         return deliveryPlace;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 }

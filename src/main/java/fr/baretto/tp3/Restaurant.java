@@ -20,7 +20,7 @@ public class Restaurant implements Subscriber {
         return name;
     }
 
-    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace) throws InterruptedException, OrderPreparationException {
+    public Order prepareOrder(List<Dish> dishes, double price, String deliveryPlace, Customer customer) throws InterruptedException, OrderPreparationException {
         Thread.sleep(new Random().nextInt(3000));
 
         Map<Dish, Integer> dishesMap = new HashMap<>();
@@ -28,7 +28,7 @@ public class Restaurant implements Subscriber {
             dishesMap.merge(dish, 1, Integer::sum);
         }
 
-        Order order = new Order(this, dishesMap, price, deliveryPlace);
+        Order order = new Order(this, dishesMap, price, deliveryPlace, customer);
 
         Double random = Math.random();
         if(random < 0.2){
@@ -55,11 +55,14 @@ public class Restaurant implements Subscriber {
         if(event instanceof DeliveryEvent) {
 
             DeliveryEvent deliveryEvent = ((DeliveryEvent) event);
+            Logger logger = Logger.getInstance();
             if (orders.contains(deliveryEvent.getOrder())) {
                 if (deliveryEvent.getDeliveryStatus() == DeliveryStatus.IN_DELIVERY) {
-                    System.out.println("["+ name +"] Livraisons de la commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
+                    logger.addLog("["+ name +"] Livraisons de la commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
+                    NotificationService.sendNotification("["+deliveryEvent.getOrder().getCustomer().getLastname()+"] Livraisons de votre commande à " + deliveryEvent.getOrder().getDeliveryPlace() + "...");
                 } else if (deliveryEvent.getDeliveryStatus() == DeliveryStatus.DELIVERED) {
-                    System.out.println("["+ name +"] Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
+                    logger.addLog("Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
+                    NotificationService.sendNotification("["+deliveryEvent.getOrder().getCustomer().getLastname()+"] Commande livrée, vous devez payer " + deliveryEvent.getOrder().getPrice() + " sivouplé.");
                     orders.remove(deliveryEvent.getOrder());
                 }
             }
