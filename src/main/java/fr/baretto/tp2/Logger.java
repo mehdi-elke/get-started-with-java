@@ -19,8 +19,9 @@ public class Logger {
         return instance;
     }
 
-    public void log(String message){
-        logs.add(message);
+    public void log(String message) {
+        String timestampedMessage = "[" + java.time.LocalDateTime.now() + "] " + message;
+        logs.add(timestampedMessage);
     }
 
     public void getLogs(){

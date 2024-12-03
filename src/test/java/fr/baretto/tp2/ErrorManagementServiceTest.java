@@ -15,7 +15,7 @@ public class ErrorManagementServiceTest {
     }
 
     @Test
-    public void testOrderPreparationError() {
+    public void testOrderPreparationError() throws DeliveryProcessingException, OrderPreparationException {
         Restaurant restaurant = new Restaurant("Testaurant");
         Dish dish = new Dish("Burger", 8.0);
 

@@ -17,7 +17,7 @@ class DeliveryPlateformTest {
     }
 
     @Test
-    void testDeliverOrder() {
+    void testDeliverOrder() throws DeliveryProcessingException {
         Restaurant testRestaurant = new Restaurant("Le Gourmet");
         Dish dish = new Dish("Burger", 8.0);
 
@@ -34,7 +34,7 @@ class DeliveryPlateformTest {
     }
 
     @Test
-    void testUniqueOrder() {
+    void testUniqueOrder() throws DeliveryProcessingException {
         Customer customer = new Customer("Bob", "Martin", "10 rue de la paix", "0623456789");
         Order order1 = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix", customer);
 
@@ -44,7 +44,7 @@ class DeliveryPlateformTest {
     }
 
     @Test
-    void testDuplicateOrder() {
+    void testDuplicateOrder() throws DeliveryProcessingException {
         Customer customer = new Customer("Charlie", "Durand", "10 rue de la paix", "0634567890");
         Order order1 = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix", customer);
         Order duplicateOrder = new Order(restaurant, new Dish("Pizza", 8.0), 2, 11.0, "10 rue de la paix", customer);
@@ -57,7 +57,7 @@ class DeliveryPlateformTest {
     }
 
     @Test
-    void testDifferentOrder() {
+    void testDifferentOrder() throws DeliveryProcessingException {
         Customer customer1 = new Customer("Diane", "Moreau", "10 rue de la paix", "0645678901");
         Customer customer2 = new Customer("Eve", "Blanc", "20 rue de la liberté", "0656789012");
 

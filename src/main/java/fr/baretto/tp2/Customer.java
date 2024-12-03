@@ -1,10 +1,10 @@
 package fr.baretto.tp2;
 
 public class Customer {
-    private String firstName;
-    private String lastName;
-    private String deliveryAddress;
-    private String phoneNumber;
+    private final String firstName;
+    private final String lastName;
+    private final String deliveryAddress;
+    private final String phoneNumber;
 
     public Customer(String firstName, String lastName, String deliveryAddress, String phoneNumber) {
         this.firstName = firstName;
