@@ -10,7 +10,7 @@ public class Logger {
     private static Logger instance;
     private final List<String> logs = new ArrayList<>();
 
-    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
+    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     private Logger() {}
 
@@ -27,6 +27,16 @@ public class Logger {
         String logEntry = timestamp + " - " + eventDescription;
         logs.add(logEntry);
         System.out.println(logEntry);
+    }
+
+    // Méthode pour enregistrer une commande
+    public void logCommand(String command) {
+        logEvent("Command received: " + command);
+    }
+
+    // Méthode pour enregistrer une livraison
+    public void logDelivery(String delivery) {
+        logEvent("Delivery made: " + delivery);
     }
 
     // Méthode pour récupérer tous les logs
