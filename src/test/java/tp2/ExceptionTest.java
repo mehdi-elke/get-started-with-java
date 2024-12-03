@@ -43,11 +43,12 @@ public class ExceptionTest {
             ListDishes listDishes1 = new ListDishes();
             listDishes1.addDish(bigMac, 1);
             String uuidVar = UUID.randomUUID().toString();
-            Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, uuidVar);
+            Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+            Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1, uuidVar);
 
             ListDishes listDishes2 = new ListDishes();
             listDishes2.addDish(sub30Teriyaki, 1);
-            Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE, uuidVar);
+            Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE, customer1, uuidVar);
 
             mcDonalds.prepareOrder(order1);
             subway.prepareOrder(order2);
@@ -69,9 +70,10 @@ public class ExceptionTest {
 
         ListDishes listDishes = new ListDishes();
         listDishes.addDish(whopper, 1);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
         listDishes.addDish(nuggets, 3);
         try {
-            Order order = new Order(burgerKing, listDishes.getDishes(), "3 rue de Paris", OrderStatus.TO_PREPARE);
+            Order order = new Order(burgerKing, listDishes.getDishes(), "3 rue de Paris", OrderStatus.TO_PREPARE, customer1);
             burgerKing.prepareOrder(order);
         }catch (Throwable e) {
             if (e instanceof DeliveryProcessingException) {

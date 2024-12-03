@@ -10,17 +10,19 @@ public class Order implements Subscribable {
     public final String address;
     private OrderStatus status;
     public String uuid;
+    public Customer customer;
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status) throws Throwable {
-        this(restaurant, dishes, address, status, generateUUID4());
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, Customer customer) throws Throwable {
+        this(restaurant, dishes, address, status, customer, generateUUID4());
     }
 
-    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, String uuid) throws Throwable {
+    public Order(Restaurant restaurant, Map<Dish, Integer> dishes, String address, OrderStatus status, Customer customer, String uuid) throws Throwable {
         this.restaurant = restaurant;
         this.dishes = dishes;
         this.address = address;
         this.status = status;
         this.uuid = uuid;
+        this.customer = customer;
 
         EventBus.handleEvent(EventType.ORDER, this);
     }
@@ -62,7 +64,7 @@ public class Order implements Subscribable {
         return this;
     }
 
-    public Customer getCustomer() { // Need to implement this method but no time
-        return new Customer("John", "Doe", address, "0123456789");
+    public Customer getCustomer() {
+        return this.customer;
     }
 }

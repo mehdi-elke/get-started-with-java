@@ -42,7 +42,8 @@ public class DeliveryPlatformTest {
         ListDishes listDishes = new ListDishes();
         listDishes.addDish(bigMac, 1);
 
-        Order order = new Order(mcDonalds, listDishes.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+        Order order = new Order(mcDonalds, listDishes.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1);
         mcDonalds.prepareOrder(order);
         Thread.sleep(4000);
 
@@ -56,12 +57,13 @@ public class DeliveryPlatformTest {
 
         ListDishes listDishes1 = new ListDishes();
         listDishes1.addDish(bigMac, 1);
-        Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+        Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1);
         order1.uuid = UUID.randomUUID().toString();
 
         ListDishes listDishes2 = new ListDishes();
         listDishes2.addDish(sub30Teriyaki, 1);
-        Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE);
+        Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE, customer1);
         order2.uuid = UUID.randomUUID().toString();
 
         mcDonalds.prepareOrder(order1);
@@ -81,11 +83,12 @@ public class DeliveryPlatformTest {
         ListDishes listDishes1 = new ListDishes();
         listDishes1.addDish(bigMac, 1);
         String uuidVar = UUID.randomUUID().toString();
-        Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, uuidVar);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+        Order order1 = new Order(mcDonalds, listDishes1.getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1, uuidVar);
 
         ListDishes listDishes2 = new ListDishes();
         listDishes2.addDish(sub30Teriyaki, 1);
-        Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE, uuidVar);
+        Order order2 = new Order(subway, listDishes2.getDishes(), "5 rue de Paris", OrderStatus.TO_PREPARE, customer1, uuidVar);
 
         mcDonalds.prepareOrder(order1);
         subway.prepareOrder(order2);

@@ -21,7 +21,7 @@ public class Customer {
         return deliveryAddress;
     }
 
-    public Customer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 }

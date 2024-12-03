@@ -39,7 +39,8 @@ public class EventBusTest {
     @Test
     public void testPublishEvent() throws Throwable {
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
-        Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+        Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1);
 
         mcdo.prepareOrder(order);
         assertEquals(OrderStatus.DELIVERED, order.getStatus());
@@ -49,7 +50,8 @@ public class EventBusTest {
     public void testNoSubscriber() throws Throwable {
         EventBus.subscribers.clear();
         Dish bigMac = new Dish("Big Mac", Dish.DishEnum.L, 8.0);
-        Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
+        Order order = new Order(mcdo, (new ListDishes()).addDish(bigMac, 1).getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1);
 
         mcdo.prepareOrder(order);
         assertEquals("", outputStreamCaptor.toString().trim());

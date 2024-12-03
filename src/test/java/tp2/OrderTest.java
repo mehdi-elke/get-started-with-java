@@ -22,10 +22,11 @@ public class OrderTest {
 
     @Test
     public void testCreateOrder() throws Throwable {
+        Customer customer1 = new Customer("John", "Doe", "2 rue de Paris", "0123456789");
         Order order1 = new Order(sacha, (new ListDishes())
                 .addDish(nouilles, 1)
                 .addDish(ramen, 3)
-                .getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE);
+                .getDishes(), "2 rue de Paris", OrderStatus.TO_PREPARE, customer1);
 
         Assertions.assertEquals(ramen.getName(), "Ramen");
         Assertions.assertEquals(ramen.getSize(), Dish.DishEnum.S);

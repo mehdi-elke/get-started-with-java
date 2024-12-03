@@ -34,7 +34,7 @@ public class DeliveryPlatform extends Subscriber {
         System.out.println("[StatusChange] Order " + order.getId() + " is now " + order.getStatus());
         if (order.getStatus() == OrderStatus.DELIVERED) {
             Logger.logDelivery(order.getId());
-            NotificationService.sendNotification(order.getCustomer().getPhoneNumber(), "Votre commande est arrivée !");
+            NotificationService.sendNotification(order.getCustomer(), "Votre commande est arrivée !");
         }
     }
 
@@ -52,7 +52,7 @@ public class DeliveryPlatform extends Subscriber {
 
         System.out.println("[Order] New order received");
         Logger.logOrder(order.getId());
-        NotificationService.sendNotification(order.getCustomer().getPhoneNumber(), "Votre commande est en cours de préparation !");
+        NotificationService.sendNotification(order.getCustomer(), "Votre commande est en cours de préparation !");
 
     }
 
