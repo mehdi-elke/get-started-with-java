@@ -61,4 +61,8 @@ public class Order implements Subscribable {
         EventBus.handleEvent(EventType.DELIVERY, this);
         return this;
     }
+
+    public Customer getCustomer() { // Need to implement this method but no time
+        return new Customer("John", "Doe", address, "0123456789");
+    }
 }
