@@ -1,26 +1,105 @@
 package tp2;
-
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.Mockito;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 public class DeliveryPlatformTest {
+    @Test
+    public void testDeliver() throws DeliveryProcessingException {
+        ErrorManagementService errorService = mock(ErrorManagementService.class);
+        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
+
+        Map<Dish, Integer> dishes = new HashMap<>();
+        dishes.put(new Dish("Burger", Dish.Size.M), 2);
+        Customer customer = new Customer("John", "Doe", "123 Main St", "555-1234");
+
+        Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
+        platform.deliver(order);
+
+        // Verify that the order was delivered and an invoice was created
+        BillingService billingService = platform.getBillingService();
+        Invoice invoice = billingService.getInvoice(order.getId());
+        assertNotNull(invoice);
+        assertEquals(Invoice.Status.CREATED, invoice.getStatus());
+
+        // Simulate delivery completion
+        platform.completeDelivery(order);
+        assertEquals(Invoice.Status.CLOSED, invoice.getStatus());
+        assertEquals(Order.Status.COMPLETED, order.getStatus());
+    }
 
     @Test
-    void testDelivery() {
-        DeliveryPlatform platform = new DeliveryPlatform();
-        Restaurant restaurant = new Restaurant("McDo");
-        Dish bigMac = new Dish("BigMac", Dish.Taille.S);
+    public void testNotifyOrder() {
+        ErrorManagementService errorService = mock(ErrorManagementService.class);
+        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
+
         Map<Dish, Integer> dishes = new HashMap<>();
-        dishes.put(bigMac, 1);
+        dishes.put(new Dish("Burger", Dish.Size.M), 2);
+        Customer customer = new Customer("John", "Doe", "123 Main St", "555-1234");
 
-        Order order = new Order(restaurant, dishes, 10.50, "1010 Drive");
+        Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
+        platform.notifyOrder(order);
 
-        // Capture the system output for verification (using a library like System Lambda)
-        platform.delivery(order);
+        // Verify that the order was delivered and an invoice was created
+        BillingService billingService = platform.getBillingService();
+        Invoice invoice = billingService.getInvoice(order.getId());
+        assertNotNull(invoice);
+        assertEquals(Invoice.Status.CREATED, invoice.getStatus());
 
-        // Since the delivery method just prints, ensure no exceptions are thrown
-        assertDoesNotThrow(() -> platform.delivery(order));
+        // Simulate delivery completion
+        platform.completeDelivery(order);
+        assertEquals(Invoice.Status.CLOSED, invoice.getStatus());
+        assertEquals(Order.Status.COMPLETED, order.getStatus());
+    }
+
+    @Test
+    public void testCancelOrderBeforeDelivery() {
+        ErrorManagementService errorService = mock(ErrorManagementService.class);
+        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
+
+        Map<Dish, Integer> dishes = new HashMap<>();
+        dishes.put(new Dish("Burger", Dish.Size.M), 2);
+        Customer customer = new Customer("John", "Doe", "123 Main St", "555-1234");
+
+        Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
+        platform.notifyOrder(order);
+
+        // Cancel the order before delivery
+        platform.cancelOrder(order);
+        assertEquals(Order.Status.CANCELLED, order.getStatus());
+
+        // Verify that the order is not delivered
+        platform.completeDelivery(order);
+        assertEquals(Order.Status.CANCELLED, order.getStatus());
+    }
+
+    @Test
+    public void testCancelOrderAfterDelivery() {
+        ErrorManagementService errorService = mock(ErrorManagementService.class);
+        DeliveryPlatform platform = new DeliveryPlatform(errorService);
+        Restaurant restaurant = new Restaurant("FastFood", platform, errorService);
+
+        Map<Dish, Integer> dishes = new HashMap<>();
+        dishes.put(new Dish("Burger", Dish.Size.M), 2);
+        Customer customer = new Customer("John", "Doe", "123 Main St", "555-1234");
+
+        Order order = new Order(restaurant, dishes, 20.0, "123 Main St", customer);
+        platform.notifyOrder(order);
+
+        // Simulate delivery completion
+        platform.completeDelivery(order);
+        assertEquals(Order.Status.COMPLETED, order.getStatus());
+
+        // Cancel the order after delivery
+        platform.cancelOrder(order);
+        assertEquals(Order.Status.CANCELLED, order.getStatus());
     }
 }

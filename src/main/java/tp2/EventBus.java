@@ -1,24 +1,44 @@
 package tp2;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventBus {
-    private final Set<Subscriber> subscribers = new HashSet<>();
+    private List<Subscriber> subscribers = new ArrayList<>();
 
-    // Méthode pour ajouter un Subscriber
     public void subscribe(Subscriber subscriber) {
-        synchronized (subscribers) {
-            subscribers.add(subscriber);
+        subscribers.add(subscriber);
+    }
+
+    public void publish(Event event) {
+        for (Subscriber subscriber : subscribers) {
+            subscriber.handleEvent(event);
+        }
+        saveEventToDatabase(event);
+    }
+
+    private void saveEventToDatabase(Event event) {
+        String sql = "INSERT INTO events (id, type, event_timestamp, details) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setObject(1, event.getId(), java.sql.Types.OTHER); // Use setObject with Types.OTHER for UUID
+            statement.setString(2, event.getType().name());
+            statement.setObject(3, LocalDateTime.now());
+            statement.setString(4, event.toString()); // Assuming Event has a proper toString() method
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    // Méthode pour notifier tous les abonnés d'un événement
-    public void publishEvent(Order order) {
-        synchronized (subscribers) {
-            for (Subscriber subscriber : subscribers) {
-                subscriber.handleEvent(order);
-            }
-        }
+    public List<Subscriber> getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(List<Subscriber> subscribers) {
+        this.subscribers = subscribers;
     }
 }

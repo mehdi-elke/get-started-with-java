@@ -1,5 +1,4 @@
 package tp2;
-
 public interface Subscriber {
-    void handleEvent(Order order);
+    void handleEvent(Event event);
 }

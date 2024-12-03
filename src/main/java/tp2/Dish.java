@@ -1,42 +1,27 @@
 package tp2;
-
 public class Dish {
-    private String nom;
-    public enum Taille {
-        S,
-        M,
-        L
-    }
-    private Taille taille;
+    public enum Size { S, M, L }
+    private String name;
+    private Size size;
 
-    public String getNom() {
-        return nom;
+    public Dish(String name, Size size) {
+        this.name = name;
+        this.size = size;
     }
 
-    public Taille getTaille() {
-        return taille;
+    public String getName() {
+        return name;
     }
 
-    public void setTaille(Taille taille) {
-        this.taille = taille;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public Size getSize() {
+        return size;
     }
 
-
-
-    public Dish(String nom, Taille taille) {
-        this.nom = nom;
-        this.taille = taille;
-    }
-
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "nom='" + nom + '\'' +
-                ", taille=" + taille +
-                '}';
+    public void setSize(Size size) {
+        this.size = size;
     }
 }

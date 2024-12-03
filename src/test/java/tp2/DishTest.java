@@ -1,23 +1,26 @@
 package tp2;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DishTest {
-
     @Test
-    void testDishCreation() {
-        Dish dish = new Dish("BigMac", Dish.Taille.S);
-
-        assertEquals("BigMac", dish.getNom());
-        assertEquals(Dish.Taille.S, dish.getTaille());
+    public void testDishCreation() {
+        Dish dish = new Dish("Burger", Dish.Size.M);
+        assertEquals("Burger", dish.getName());
+        assertEquals(Dish.Size.M, dish.getSize());
     }
 
     @Test
-    void testDishToString() {
-        Dish dish = new Dish("McFries", Dish.Taille.M);
+    public void testSetName() {
+        Dish dish = new Dish("Burger", Dish.Size.M);
+        dish.setName("Pizza");
+        assertEquals("Pizza", dish.getName());
+    }
 
-        String expected = "Dish{nom='McFries', taille=M}";
-        assertEquals(expected, dish.toString());
+    @Test
+    public void testSetSize() {
+        Dish dish = new Dish("Burger", Dish.Size.M);
+        dish.setSize(Dish.Size.L);
+        assertEquals(Dish.Size.L, dish.getSize());
     }
 }
